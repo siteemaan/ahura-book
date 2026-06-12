@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بیندیشید و ثروتمند شوید — ناپلئون هیل</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:           #08130d;
+            --bg-card:      #0e1f15;
+            --bg-mid:       #122619;
+            --accent:       #1f7a4d;
+            --gold:         #d4af37;
+            --gold-dim:     rgba(212, 175, 55, 0.12);
+            --accent-dim:   rgba(31, 122, 77, 0.12);
+            --text:         #e8f0ea;
+            --text-muted:   #8aa392;
+            --border:       #1c3526;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.95;
+            overflow-x: hidden;
+        }
+
+        /* ─── TOPBAR ─── */
+        .topbar {
+            padding: 16px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+        .back-btn {
+            text-decoration: none;
+            color: var(--gold);
+            font-size: 0.88rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: opacity 0.2s;
+        }
+        .back-btn:hover { opacity: 0.65; }
+        .back-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 80px 24px 65px;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        /* رگه‌های طلایی ظریف */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(
+                    115deg,
+                    transparent,
+                    transparent 90px,
+                    rgba(212,175,55,0.035) 90px,
+                    rgba(212,175,55,0.035) 91px
+                ),
+                repeating-linear-gradient(
+                    65deg,
+                    transparent,
+                    transparent 130px,
+                    rgba(212,175,55,0.025) 130px,
+                    rgba(212,175,55,0.025) 131px
+                );
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            color: var(--gold);
+            text-transform: uppercase;
+            border: 1px solid rgba(212,175,55,0.35);
+            border-radius: 4px;
+            padding: 5px 14px;
+            margin-bottom: 28px;
+            background: var(--gold-dim);
+        }
+
+        .hero h1 {
+            font-size: 2.9rem;
+            font-weight: 900;
+            line-height: 1.35;
+            letter-spacing: -1.5px;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 em {
+            font-style: normal;
+            background: linear-gradient(90deg, var(--gold), #f5e08a, var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-sub {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            font-weight: 300;
+            margin-bottom: 36px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-quote {
+            max-width: 580px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 1.02rem;
+            font-style: italic;
+            font-weight: 300;
+            line-height: 1.85;
+            border-right: 3px solid var(--gold);
+            padding-right: 18px;
+            text-align: right;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ─── CONTAINER ─── */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 75px 28px 60px;
+        }
+
+        /* ─── SECTION GROUP HEADER ─── */
+        .group-header {
+            margin-bottom: 44px;
+        }
+        .group-header h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .group-header h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(212,175,55,0.4), transparent);
+        }
+
+        /* ─── PRINCIPLE SECTION ─── */
+        .law-section {
+            margin-bottom: 60px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid var(--border);
+        }
+        .group-block:last-child .law-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .law-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .law-tag {
+            flex-shrink: 0;
+            font-size: 0.7rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid rgba(31,122,77,0.3);
+            border-radius: 5px;
+            padding: 5px 11px;
+            margin-top: 4px;
+            white-space: nowrap;
+        }
+
+        .law-title-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .law-title {
+            font-size: 1.32rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        .law-title-en {
+            font-size: 0.8rem;
+            color: var(--gold);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            opacity: 0.75;
+        }
+
+        /* ─── CONTENT ─── */
+        .content p {
+            color: #c9d6cd;
+            font-size: 1.0rem;
+            font-weight: 300;
+            text-align: justify;
+            margin-bottom: 18px;
+        }
+        .content p:last-child { margin-bottom: 0; }
+
+        /* ─── سطرهای فرعی برای اصل تخیل ─── */
+        .sub-list {
+            margin: 18px 0;
+            padding-right: 20px;
+            border-right: 2px solid rgba(212,175,55,0.25);
+        }
+        .sub-list-item {
+            margin-bottom: 14px;
+            color: #c9d6cd;
+            font-size: 0.96rem;
+            font-weight: 300;
+            line-height: 1.85;
+        }
+        .sub-list-item:last-child { margin-bottom: 0; }
+        .sub-list-item strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ─── FEARS SECTION ─── */
+        .fears-section {
+            background: var(--bg-mid);
+            border: 1px solid var(--border);
+            border-right: 4px solid var(--gold);
+            border-radius: 8px;
+            padding: 32px 30px;
+            margin-top: 10px;
+        }
+        .fears-section h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 14px;
+        }
+        .fears-section > p {
+            color: var(--text-muted);
+            font-size: 0.97rem;
+            margin-bottom: 22px;
+        }
+        .fears-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        @media (max-width: 540px) {
+            .fears-grid { grid-template-columns: 1fr; }
+        }
+        .fear-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 14px 16px;
+            font-size: 0.92rem;
+            color: #c9d6cd;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .fear-num {
+            flex-shrink: 0;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--gold-dim);
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ─── SUMMARY BOX ─── */
+        .summary-box {
+            margin: 60px 28px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            background: linear-gradient(135deg, var(--bg-mid), var(--bg-card));
+            border: 1px solid rgba(212,175,55,0.25);
+            border-radius: 10px;
+            padding: 34px 32px;
+            text-align: center;
+        }
+        .summary-box .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .summary-box p {
+            color: #d8e4dd;
+            font-size: 1.0rem;
+            font-weight: 300;
+            line-height: 2;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            text-align: center;
+            padding: 55px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.87rem;
+            margin-top: 60px;
+        }
+        footer .tagline {
+            background: linear-gradient(90deg, var(--gold), #f5e08a, var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    <a href="index.html" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        بازگشت به کتابخانه
+    </a>
+</div>
+
+<div class="hero">
+    <div class="hero-badge">تحلیل کامل کتاب</div>
+    <h1>بیندیشید و <em>ثروتمند</em> شوید</h1>
+    <p class="hero-sub">اثر ناپلئون هیل — ۱۳ اصل برای دستیابی به موفقیت و ثروت</p>
+    <p class="hero-quote">افکار، اگر با هدف مشخص و پافشاری ترکیب شوند، به واقعیت فیزیکی و ثروت تبدیل می‌شوند.</p>
+</div>
+
+<div class="container">
+
+    <!-- گروه ۱: پایه‌ریزی ذهنی -->
+    <div class="group-block">
+        <div class="group-header">
+            <h2>پایه‌ریزی ذهنی</h2>
+        </div>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۰۱</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">اشتیاق سوزان</h2>
+                    <span class="law-title-en">Desire</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>نقطه شروع هر موفقیتی، داشتن یک خواسته کاملاً مشخص و واضح است. آرزو کردنِ صرف، ثروت نمی‌آورد. باید چنان اشتیاق سوزانی برای هدف خود داشته باشید که به یک وسواس ذهنی تبدیل شود؛ تا جایی که تمام پل‌های پشت سرتان را خراب کنید و راهی جز پیروزی باقی نماند.</p>
+            </div>
+        </section>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۰۲</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">ایمان و باور</h2>
+                    <span class="law-title-en">Faith</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>اشتیاق بدون باور قلبی بی‌فایده است. باید عمیقاً باور داشته باشید که به هدفتان می‌رسید. ایمان، ذهن ناخودآگاه را هدایت می‌کند تا فرصت‌ها را ببیند. وقتی فکر با احساسِ ایمان ترکیب می‌شود، ناخودآگاه آن را به عنوان واقعیت می‌پذیرد.</p>
+            </div>
+        </section>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۰۳</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">تلقین به خود</h2>
+                    <span class="law-title-en">Autosuggestion</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>این اصل، ابزار برنامه‌ریزی ذهن ناخودآگاه است. هیل توصیه می‌کند اهداف خود را مکتوب کنید و روزی دو بار، صبح و شب، با صدای بلند و احساس عمیق بخوانید. این تکرار مداوم، افکار هدفمند را در لایه‌های عمیق ذهن حک می‌کند.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- گروه ۲: ابزارها و برنامه‌ریزی عملی -->
+    <div class="group-block">
+        <div class="group-header">
+            <h2>ابزارها و برنامه‌ریزی عملی</h2>
+        </div>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۰۴</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">دانش تخصصی</h2>
+                    <span class="law-title-en">Specialized Knowledge</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>دانش عمومی و دانشگاهی به‌تنهایی ثروت‌آفرین نیست. باید دانش تخصصیِ مرتبط با هدف یا کسب‌وکارتان را داشته باشید. اگر خودتان این دانش را ندارید، باید بدانید چطور افرادی که آن را دارند دور خود جمع کنید. مهم نیست چقدر می‌دانید، مهم این است که چطور آن را به کار می‌گیرید.</p>
+            </div>
+        </section>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۰۵</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">تخیل</h2>
+                    <span class="law-title-en">Imagination</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>ذهن انسان می‌تواند هر چیزی را که تصور کند، خلق کند. هیل تخیل را به دو نوع تقسیم می‌کند:</p>
+                <div class="sub-list">
+                    <div class="sub-list-item"><strong>تخیل ترکیبی:</strong> ترکیب کردن ایده‌ها، نقشه‌ها و مفاهیم قدیمی به شکل‌های جدید.</div>
+                    <div class="sub-list-item"><strong>تخیل خلاق:</strong> شهود و الهاماتی که مستقیماً به ذهن خطور می‌کنند و ایده‌های کاملاً نو می‌آفرینند.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۰۶</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">برنامه‌ریزی سازمان‌یافته</h2>
+                    <span class="law-title-en">Organized Planning</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>اشتیاق و ایده باید به یک برنامه عملی و مکتوب تبدیل شوند؛ بدون برنامه، هدف فقط یک رویاست. هیل تأکید می‌کند اگر برنامه اول شکست خورد، تسلیم نشوید و برنامه‌ای دیگر بسازید. شکست یعنی نقص در برنامه، نه نقص در شما.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- گروه ۳: اقدامات و اهرم‌های قدرت -->
+    <div class="group-block">
+        <div class="group-header">
+            <h2>اقدامات و اهرم‌های قدرت</h2>
+        </div>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۰۷</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">تصمیم‌گیری</h2>
+                    <span class="law-title-en">Decision</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>یکی از بارزترین ویژگی‌های افراد موفق، توانایی تصمیم‌گیری سریع و قاطع و تغییر دادنِ کندِ آن تصمیم‌هاست. در مقابل، افراد ناموفق دیر تصمیم می‌گیرند و خیلی زود و مکرر تصمیم خود را عوض می‌کنند. تعلل و به تعویق انداختن کارها، دشمن اصلی موفقیت است.</p>
+            </div>
+        </section>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۰۸</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">پشتکار</h2>
+                    <span class="law-title-en">Persistence</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>قدرت اراده و پایداری، مرز میان شکست و پیروزی است. بیشتر مردم با اولین نشانه‌های سختی یا مخالفت دست از کار می‌کشند. پشتکار، سوختی است که برای تبدیل اشتیاق به معادل فیزیکی‌اش نیاز دارید.</p>
+            </div>
+        </section>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۰۹</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">قدرت ذهن برتر</h2>
+                    <span class="law-title-en">The Master Mind</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>هیچ‌کس به‌تنهایی نمی‌تواند به ثروت کلان برسد. «ذهن برتر» یعنی اتحاد و همکاریِ هماهنگ دو یا چند نفر که برای یک هدف مشخص تلاش می‌کنند. وقتی چند ذهن با یکدیگر هماهنگ می‌شوند، نیروی سومی شکل می‌گیرد که انرژی و قدرت آن فراتر از مجموع تک‌تک افراد است.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- گروه ۴: فرکانس‌های عالی و ناخودآگاه -->
+    <div class="group-block">
+        <div class="group-header">
+            <h2>فرکانس‌های عالی و ناخودآگاه</h2>
+        </div>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۱۰</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">هدایت انرژی جنسی</h2>
+                    <span class="law-title-en">Sex Transmutation</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>محرک و انرژی جنسی یکی از قوی‌ترین نیروهای فیزیکی و روانی انسان است. هنر موفقیت در این است که این انرژی عظیم را صرفاً در مسائل فیزیکی رها نکنید، بلکه آن را تغییر جهت داده و به سمتی هدایت کنید که قدرت تخیل، خلاقیت و پشتکار شما را در کار چندین برابر کند.</p>
+            </div>
+        </section>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۱۱</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">ذهن ناخودآگاه</h2>
+                    <span class="law-title-en">The Subconscious Mind</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>ناخودآگاه مانند یک بایگانی بزرگ است که هر فکر و احساسی را ثبت می‌کند و رابط میان ذهن شما و هوش بی‌پایان جهان است. شما نمی‌توانید ناخودآگاه را کاملاً کنترل کنید، اما می‌توانید آن را با افکار مثبت، اهداف و برنامه‌ها تغذیه کنید تا مسیر حرکتتان را به سمت هدف تنظیم کند.</p>
+            </div>
+        </section>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۱۲</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">مغز</h2>
+                    <span class="law-title-en">The Brain</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>هیل مغز انسان را به یک ایستگاه رادیویی تشبیه می‌کند که هم فرستنده و هم گیرنده امواج فکری است. وقتی مغز از طریق اصول قبلی — مانند اشتیاق و ذهن برتر — تحریک و فعال می‌شود، فرکانس‌های قوی‌تری ارسال و دریافت می‌کند که شرایط و افراد مناسب را به سمتتان جذب می‌کند.</p>
+            </div>
+        </section>
+
+        <section class="law-section">
+            <div class="law-header">
+                <span class="law-tag">اصل ۱۳</span>
+                <div class="law-title-wrap">
+                    <h2 class="law-title">حس ششم</h2>
+                    <span class="law-title-en">The Sixth Sense</span>
+                </div>
+            </div>
+            <div class="content">
+                <p>قله فلسفه ناپلئون هیل و آخرین اصل کتاب. حس ششم یا همان «شهود»، زمانی فعال می‌شود که ۱۲ اصل پیشین را کاملاً درک و تمرین کرده باشید. این اصل به شما اجازه می‌دهد در مواقع حساس، خطرات را پیش‌بینی کنید یا ایده‌های نجات‌بخش را به‌صورت ناگهانی دریافت کنید.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- شش شبح ترس -->
+    <div class="fears-section">
+        <h2>شش شبح ترس</h2>
+        <p>پیش از پیاده‌سازی ۱۳ اصل، باید ذهن خود را از این شش ترس اصلی پاک کنید — مهم‌ترین موانع رسیدن به ثروت و موفقیت:</p>
+        <div class="fears-grid">
+            <div class="fear-item"><span class="fear-num">۱</span> ترس از فقر</div>
+            <div class="fear-item"><span class="fear-num">۲</span> ترس از انتقاد و قضاوت دیگران</div>
+            <div class="fear-item"><span class="fear-num">۳</span> ترس از بیماری و از دست رفتن سلامتی</div>
+            <div class="fear-item"><span class="fear-num">۴</span> ترس از دست دادن عشق یا فرد عزیز</div>
+            <div class="fear-item"><span class="fear-num">۵</span> ترس از پیری و ناتوانی</div>
+            <div class="fear-item"><span class="fear-num">۶</span> ترس از مرگ</div>
+        </div>
+    </div>
+
+    <!-- خلاصه کلی -->
+    <div class="summary-box">
+        <div class="label">خلاصه کتاب در یک نگاه</div>
+        <p>همه چیز از یک فکر و اشتیاق مشخص در ذهن شروع می‌شود، با ایمان و تلقین تقویت می‌گردد، با برنامه‌ریزی، پشتکار و کار تیمی به مرحله اجرا می‌رسد و در نهایت با پاکسازی ذهن از ترس‌ها، به ثروت و موفقیت مادی تبدیل می‌شود.</p>
+    </div>
+
+</div>
+
+<footer>
+    این خلاصه با هدف ارتقای آگاهی و درک عمیق‌تر مفاهیم کتاب تهیه شده است.
+    <div class="tagline">«افکار به ثروت تبدیل می‌شوند.»</div>
+</footer>
+
+</body>
+</html>
