@@ -7,18 +7,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg:           #08130d;
-            --bg-card:      #0e1f15;
-            --bg-mid:       #122619;
-            --accent:       #1f7a4d;
-            --gold:         #d4af37;
-            --gold-dim:     rgba(212, 175, 55, 0.12);
-            --accent-dim:   rgba(31, 122, 77, 0.12);
-            --text:         #e8f0ea;
-            --text-muted:   #8aa392;
-            --border:       #1c3526;
+            --bg:           #080706;
+            --bg-card:      #111009;
+            --bg-mid:       #181510;
+            --gold:         #d4a843;
+            --gold-light:   #f0c96a;
+            --gold-pale:    #f7e4a8;
+            --gold-dim:     rgba(212, 168, 67, 0.10);
+            --gold-border:  rgba(212, 168, 67, 0.22);
+            --cream:        #f5ead8;
+            --text:         #f0e6ce;
+            --text-muted:   #7a6a4a;
+            --border:       #221e14;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,319 +35,315 @@
             overflow-x: hidden;
         }
 
+        /* ─── اعداد دلاری پس‌زمینه ─── */
+        body::before {
+            content: '$  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $  $';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: rgba(212,168,67,0.025);
+            line-height: 3.2;
+            word-spacing: 30px;
+            letter-spacing: 20px;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            white-space: pre-wrap;
+        }
+
         /* ─── TOPBAR ─── */
         .topbar {
-            padding: 16px 32px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 16px 36px;
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
+            background: rgba(8,7,6,0.96);
+            backdrop-filter: blur(10px);
         }
         .back-btn {
             text-decoration: none;
-            color: var(--gold);
+            color: var(--gold-light);
             font-size: 0.88rem;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 8px;
             transition: opacity 0.2s;
         }
-        .back-btn:hover { opacity: 0.65; }
+        .back-btn:hover { opacity: 0.6; }
         .back-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
 
         /* ─── HERO ─── */
         .hero {
             position: relative;
+            z-index: 1;
             text-align: center;
-            padding: 80px 24px 65px;
-            border-bottom: 1px solid var(--border);
+            padding: 90px 24px 80px;
+            border-bottom: 1px solid var(--gold-border);
             overflow: hidden;
         }
 
-        /* رگه‌های طلایی ظریف */
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                repeating-linear-gradient(
-                    115deg,
-                    transparent,
-                    transparent 90px,
-                    rgba(212,175,55,0.035) 90px,
-                    rgba(212,175,55,0.035) 91px
-                ),
-                repeating-linear-gradient(
-                    65deg,
-                    transparent,
-                    transparent 130px,
-                    rgba(212,175,55,0.025) 130px,
-                    rgba(212,175,55,0.025) 131px
-                );
+            background: radial-gradient(ellipse at 50% 0%, rgba(212,168,67,0.10) 0%, transparent 70%);
             pointer-events: none;
+        }
+
+        .hero-coin {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 22px;
+            filter: drop-shadow(0 0 18px rgba(212,168,67,0.5));
         }
 
         .hero-badge {
             display: inline-block;
-            font-size: 0.72rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.68rem;
             font-weight: 700;
-            letter-spacing: 3.5px;
+            letter-spacing: 5px;
             color: var(--gold);
             text-transform: uppercase;
-            border: 1px solid rgba(212,175,55,0.35);
-            border-radius: 4px;
-            padding: 5px 14px;
+            border: 1px solid var(--gold-border);
+            border-radius: 2px;
+            padding: 6px 20px;
             margin-bottom: 28px;
             background: var(--gold-dim);
         }
 
         .hero h1 {
-            font-size: 2.9rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.8rem;
             font-weight: 900;
-            line-height: 1.35;
-            letter-spacing: -1.5px;
-            margin-bottom: 14px;
-            position: relative;
-            z-index: 1;
+            line-height: 1.2;
+            color: var(--gold-light);
+            margin-bottom: 8px;
+            text-shadow: 0 0 60px rgba(212,168,67,0.25);
         }
+
         .hero h1 em {
             font-style: normal;
-            background: linear-gradient(90deg, var(--gold), #f5e08a, var(--gold));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--gold-pale);
+            display: block;
+            font-size: 4.4rem;
         }
 
         .hero-sub {
             color: var(--text-muted);
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             font-weight: 300;
-            margin-bottom: 36px;
-            position: relative;
-            z-index: 1;
+            margin: 14px 0 38px;
+            letter-spacing: 1px;
         }
 
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 0 auto 36px;
+            max-width: 340px;
+        }
+        .hdl { flex: 1; height: 1px; background: linear-gradient(to left, transparent, var(--gold)); }
+        .hdl:last-child { background: linear-gradient(to right, transparent, var(--gold)); }
+        .hdc { color: var(--gold); font-size: 1rem; }
+
         .hero-quote {
-            max-width: 580px;
+            max-width: 600px;
             margin: 0 auto;
-            color: var(--text-muted);
-            font-size: 1.02rem;
-            font-style: italic;
+            color: #c8a96a;
+            font-size: 1.05rem;
             font-weight: 300;
-            line-height: 1.85;
-            border-right: 3px solid var(--gold);
-            padding-right: 18px;
-            text-align: right;
-            position: relative;
-            z-index: 1;
+            line-height: 1.9;
+            font-style: italic;
         }
 
         /* ─── CONTAINER ─── */
         .container {
-            max-width: 800px;
+            position: relative;
+            z-index: 1;
+            max-width: 820px;
             margin: 0 auto;
-            padding: 75px 28px 60px;
+            padding: 80px 32px 110px;
         }
 
-        /* ─── SECTION GROUP HEADER ─── */
-        .group-header {
-            margin-bottom: 44px;
-        }
-        .group-header h2 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--gold);
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .group-header h2::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(212,175,55,0.4), transparent);
-        }
-
-        /* ─── PRINCIPLE SECTION ─── */
-        .law-section {
-            margin-bottom: 60px;
-            padding-bottom: 60px;
+        /* ─── CHAPTER SECTION ─── */
+        .chapter-section {
+            margin-bottom: 80px;
+            padding-bottom: 80px;
             border-bottom: 1px solid var(--border);
+            position: relative;
         }
-        .group-block:last-child .law-section:last-child {
+        .chapter-section:last-child {
             border-bottom: none;
             margin-bottom: 0;
             padding-bottom: 0;
         }
 
-        .law-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            margin-bottom: 22px;
+        /* شماره بزرگ پس‌زمینه */
+        .chapter-section::before {
+            content: attr(data-num);
+            position: absolute;
+            top: -14px;
+            left: -8px;
+            font-family: 'Playfair Display', serif;
+            font-size: 7rem;
+            font-weight: 900;
+            color: rgba(212,168,67,0.04);
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
         }
 
-        .law-tag {
+        .chapter-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .chapter-tag {
             flex-shrink: 0;
-            font-size: 0.7rem;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            color: var(--accent);
-            background: var(--accent-dim);
-            border: 1px solid rgba(31,122,77,0.3);
-            border-radius: 5px;
-            padding: 5px 11px;
-            margin-top: 4px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+            background: var(--gold-dim);
+            border: 1px solid var(--gold-border);
+            border-radius: 2px;
+            padding: 5px 13px;
+            margin-top: 5px;
             white-space: nowrap;
         }
 
-        .law-title-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .law-title {
-            font-size: 1.32rem;
+        .chapter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--text);
-            line-height: 1.5;
-        }
-        .law-title-en {
-            font-size: 0.8rem;
-            color: var(--gold);
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            opacity: 0.75;
+            color: var(--gold-pale);
+            line-height: 1.55;
         }
 
         /* ─── CONTENT ─── */
         .content p {
-            color: #c9d6cd;
+            color: #c8b88a;
             font-size: 1.0rem;
             font-weight: 300;
             text-align: justify;
-            margin-bottom: 18px;
+            margin-bottom: 22px;
+            line-height: 2.05;
         }
         .content p:last-child { margin-bottom: 0; }
 
-        /* ─── سطرهای فرعی برای اصل تخیل ─── */
-        .sub-list {
-            margin: 18px 0;
-            padding-right: 20px;
-            border-right: 2px solid rgba(212,175,55,0.25);
-        }
-        .sub-list-item {
-            margin-bottom: 14px;
-            color: #c9d6cd;
-            font-size: 0.96rem;
-            font-weight: 300;
-            line-height: 1.85;
-        }
-        .sub-list-item:last-child { margin-bottom: 0; }
-        .sub-list-item strong {
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        /* ─── FEARS SECTION ─── */
-        .fears-section {
+        /* ─── VAULT BOX (نسخه ثروتی story-box) ─── */
+        .vault-box {
+            position: relative;
             background: var(--bg-mid);
             border: 1px solid var(--border);
             border-right: 4px solid var(--gold);
-            border-radius: 8px;
-            padding: 32px 30px;
-            margin-top: 10px;
-        }
-        .fears-section h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--gold);
-            margin-bottom: 14px;
-        }
-        .fears-section > p {
-            color: var(--text-muted);
-            font-size: 0.97rem;
-            margin-bottom: 22px;
-        }
-        .fears-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-        @media (max-width: 540px) {
-            .fears-grid { grid-template-columns: 1fr; }
-        }
-        .fear-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 14px 16px;
-            font-size: 0.92rem;
-            color: #c9d6cd;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .fear-num {
-            flex-shrink: 0;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            background: var(--gold-dim);
-            color: var(--gold);
-            font-weight: 700;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: 3px;
+            padding: 26px 30px 24px;
+            margin: 28px 0;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.4), inset 0 0 40px rgba(212,168,67,0.02);
         }
 
-        /* ─── SUMMARY BOX ─── */
-        .summary-box {
-            margin: 60px 28px 0;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            background: linear-gradient(135deg, var(--bg-mid), var(--bg-card));
-            border: 1px solid rgba(212,175,55,0.25);
-            border-radius: 10px;
-            padding: 34px 32px;
-            text-align: center;
-        }
-        .summary-box .label {
-            font-size: 0.7rem;
+        .vault-box-label {
+            position: absolute;
+            top: -11px;
+            right: 18px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.6rem;
             font-weight: 700;
             letter-spacing: 3px;
             color: var(--gold);
+            background: var(--bg-mid);
+            padding: 0 10px;
             text-transform: uppercase;
-            margin-bottom: 16px;
         }
-        .summary-box p {
-            color: #d8e4dd;
-            font-size: 1.0rem;
-            font-weight: 300;
+
+        .vault-box p,
+        .vault-box {
+            color: var(--text-muted);
+            font-size: 0.97rem;
             line-height: 2;
+        }
+
+        /* ─── نقل‌قول طلایی ─── */
+        .gold-quote {
+            font-size: 1.08rem;
+            font-weight: 500;
+            color: var(--gold-light);
+            border-right: 3px solid var(--gold);
+            padding: 6px 18px;
+            margin: 28px 0;
+            line-height: 1.85;
+            font-style: italic;
+            background: linear-gradient(to left, transparent, rgba(212,168,67,0.04));
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* ─── لیست قوانین ─── */
+        .law-list {
+            list-style: none;
+            margin: 18px 0 22px;
+            padding: 0;
+        }
+        .law-list li {
+            color: #c8b88a;
+            font-size: 0.97rem;
+            font-weight: 300;
+            padding: 8px 0 8px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            line-height: 1.8;
+        }
+        .law-list li:last-child { border-bottom: none; }
+        .law-list li .num {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
         }
 
         /* ─── FOOTER ─── */
         footer {
+            position: relative;
+            z-index: 1;
             text-align: center;
-            padding: 55px 24px;
-            border-top: 1px solid var(--border);
+            padding: 60px 24px;
+            border-top: 1px solid var(--gold-border);
             color: var(--text-muted);
-            font-size: 0.87rem;
-            margin-top: 60px;
+            font-size: 0.88rem;
+        }
+        .footer-coin {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 14px;
+            filter: drop-shadow(0 0 10px rgba(212,168,67,0.4));
         }
         footer .tagline {
-            background: linear-gradient(90deg, var(--gold), #f5e08a, var(--gold));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-size: 1.05rem;
-            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            color: var(--gold-light);
+            font-size: 1.0rem;
+            font-weight: 700;
             margin-top: 12px;
-            letter-spacing: 0.5px;
-            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.4rem; }
+            .hero h1 em { font-size: 2.8rem; }
+            .container { padding-right: 18px; padding-left: 18px; }
         }
     </style>
 </head>
@@ -359,240 +359,273 @@
 </div>
 
 <div class="hero">
+    <span class="hero-coin">💰</span>
     <div class="hero-badge">تحلیل کامل کتاب</div>
-    <h1>بیندیشید و <em>ثروتمند</em> شوید</h1>
-    <p class="hero-sub">اثر ناپلئون هیل — ۱۳ اصل برای دستیابی به موفقیت و ثروت</p>
-    <p class="hero-quote">افکار، اگر با هدف مشخص و پافشاری ترکیب شوند، به واقعیت فیزیکی و ثروت تبدیل می‌شوند.</p>
+    <h1>بیندیشید<em>و ثروتمند شوید</em></h1>
+    <p class="hero-sub">ناپلئون هیل — رازی که ۵۰۰ مرد ثروتمند با او در میان گذاشتند</p>
+    <div class="hero-divider">
+        <div class="hdl"></div>
+        <span class="hdc">✦</span>
+        <div class="hdl"></div>
+    </div>
+    <p class="hero-quote">«هر چیزی که ذهن انسان بتواند تصور کند و به آن ایمان داشته باشد، می‌تواند به دست بیاورد.»</p>
 </div>
 
 <div class="container">
 
-    <!-- گروه ۱: پایه‌ریزی ذهنی -->
-    <div class="group-block">
-        <div class="group-header">
-            <h2>پایه‌ریزی ذهنی</h2>
+    <!-- فصل ۱ -->
+    <section class="chapter-section" data-num="01">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۱</span>
+            <h2 class="chapter-title">قدرت تفکر</h2>
         </div>
-
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۰۱</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">اشتیاق سوزان</h2>
-                    <span class="law-title-en">Desire</span>
-                </div>
+        <div class="content">
+            <p>هر چیزی که ذهن انسان بتواند تصور کند و به آن ایمان داشته باشد، می‌تواند به دست بیاورد. اندرو کارنگی راز ثروت را به هیل آموخت: یک ایده ساده، وقتی با اشتیاق و ایمان ترکیب شود، می‌تواند هر هدفی را محقق کند.</p>
+            <div class="vault-box">
+                <span class="vault-box-label">داستان ادوین بارنز</span>
+                <p>ادوین بارنز می‌خواست شریک تجاری ادیسون شود، نه کارمندش. او با قطار به نیوجرسی رفت، بدون پول و بدون آشنایی. اما یک چیز داشت: اراده‌ای که حاضر نبود جایگزین دیگری برای هدفش بپذیرد. در نهایت شریک ادیسون شد.</p>
             </div>
-            <div class="content">
-                <p>نقطه شروع هر موفقیتی، داشتن یک خواسته کاملاً مشخص و واضح است. آرزو کردنِ صرف، ثروت نمی‌آورد. باید چنان اشتیاق سوزانی برای هدف خود داشته باشید که به یک وسواس ذهنی تبدیل شود؛ تا جایی که تمام پل‌های پشت سرتان را خراب کنید و راهی جز پیروزی باقی نماند.</p>
+            <div class="vault-box">
+                <span class="vault-box-label">قانون طلایی — داستان دارسی</span>
+                <p>دارسی بعد از سال‌ها حفاری طلا، سه فوت مانده به رگه اصلی دست کشید. کسی که ماشین‌آلات را از او خرید، با یک مشاور معدن مشورت کرد و دقیقاً سه فوت پایین‌تر به یکی از بزرگترین رگه‌های طلا رسید.</p>
             </div>
-        </section>
-
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۰۲</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">ایمان و باور</h2>
-                    <span class="law-title-en">Faith</span>
-                </div>
-            </div>
-            <div class="content">
-                <p>اشتیاق بدون باور قلبی بی‌فایده است. باید عمیقاً باور داشته باشید که به هدفتان می‌رسید. ایمان، ذهن ناخودآگاه را هدایت می‌کند تا فرصت‌ها را ببیند. وقتی فکر با احساسِ ایمان ترکیب می‌شود، ناخودآگاه آن را به عنوان واقعیت می‌پذیرد.</p>
-            </div>
-        </section>
-
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۰۳</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">تلقین به خود</h2>
-                    <span class="law-title-en">Autosuggestion</span>
-                </div>
-            </div>
-            <div class="content">
-                <p>این اصل، ابزار برنامه‌ریزی ذهن ناخودآگاه است. هیل توصیه می‌کند اهداف خود را مکتوب کنید و روزی دو بار، صبح و شب، با صدای بلند و احساس عمیق بخوانید. این تکرار مداوم، افکار هدفمند را در لایه‌های عمیق ذهن حک می‌کند.</p>
-            </div>
-        </section>
-    </div>
-
-    <!-- گروه ۲: ابزارها و برنامه‌ریزی عملی -->
-    <div class="group-block">
-        <div class="group-header">
-            <h2>ابزارها و برنامه‌ریزی عملی</h2>
+            <div class="gold-quote">هرگز تسلیم نشو.</div>
         </div>
+    </section>
 
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۰۴</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">دانش تخصصی</h2>
-                    <span class="law-title-en">Specialized Knowledge</span>
-                </div>
-            </div>
-            <div class="content">
-                <p>دانش عمومی و دانشگاهی به‌تنهایی ثروت‌آفرین نیست. باید دانش تخصصیِ مرتبط با هدف یا کسب‌وکارتان را داشته باشید. اگر خودتان این دانش را ندارید، باید بدانید چطور افرادی که آن را دارند دور خود جمع کنید. مهم نیست چقدر می‌دانید، مهم این است که چطور آن را به کار می‌گیرید.</p>
-            </div>
-        </section>
-
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۰۵</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">تخیل</h2>
-                    <span class="law-title-en">Imagination</span>
-                </div>
-            </div>
-            <div class="content">
-                <p>ذهن انسان می‌تواند هر چیزی را که تصور کند، خلق کند. هیل تخیل را به دو نوع تقسیم می‌کند:</p>
-                <div class="sub-list">
-                    <div class="sub-list-item"><strong>تخیل ترکیبی:</strong> ترکیب کردن ایده‌ها، نقشه‌ها و مفاهیم قدیمی به شکل‌های جدید.</div>
-                    <div class="sub-list-item"><strong>تخیل خلاق:</strong> شهود و الهاماتی که مستقیماً به ذهن خطور می‌کنند و ایده‌های کاملاً نو می‌آفرینند.</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۰۶</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">برنامه‌ریزی سازمان‌یافته</h2>
-                    <span class="law-title-en">Organized Planning</span>
-                </div>
-            </div>
-            <div class="content">
-                <p>اشتیاق و ایده باید به یک برنامه عملی و مکتوب تبدیل شوند؛ بدون برنامه، هدف فقط یک رویاست. هیل تأکید می‌کند اگر برنامه اول شکست خورد، تسلیم نشوید و برنامه‌ای دیگر بسازید. شکست یعنی نقص در برنامه، نه نقص در شما.</p>
-            </div>
-        </section>
-    </div>
-
-    <!-- گروه ۳: اقدامات و اهرم‌های قدرت -->
-    <div class="group-block">
-        <div class="group-header">
-            <h2>اقدامات و اهرم‌های قدرت</h2>
+    <!-- فصل ۲ -->
+    <section class="chapter-section" data-num="02">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۲</span>
+            <h2 class="chapter-title">اشتیاق (Desire)</h2>
         </div>
-
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۰۷</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">تصمیم‌گیری</h2>
-                    <span class="law-title-en">Decision</span>
-                </div>
+        <div class="content">
+            <p>نقطه شروع تمام دستاوردها، یک آرزوی سوزان است، نه یک امید یا آرزوی معمولی. شش قدم برای تبدیل اشتیاق به طلا:</p>
+            <ul class="law-list">
+                <li><span class="num">۱</span> مشخص کن دقیقاً چقدر پول می‌خواهی</li>
+                <li><span class="num">۲</span> تعیین کن در برابرش چه می‌دهی</li>
+                <li><span class="num">۳</span> تاریخ دقیق رسیدن را مشخص کن</li>
+                <li><span class="num">۴</span> یک برنامه مشخص بساز و همین الان شروع کن</li>
+                <li><span class="num">۵</span> همه اینها را بنویس</li>
+                <li><span class="num">۶</span> دو بار در روز با صدای بلند بخوانش</li>
+            </ul>
+            <div class="vault-box">
+                <span class="vault-box-label">داستان پسر هیل</span>
+                <p>پسرش بدون گوش به دنیا آمد. اما هیل از همان ابتدا به او القا کرد که می‌تواند بشنود. در نهایت پسرش با یک وسیله تقویتی حدود ۸۵٪ شنوایی پیدا کرد.</p>
             </div>
-            <div class="content">
-                <p>یکی از بارزترین ویژگی‌های افراد موفق، توانایی تصمیم‌گیری سریع و قاطع و تغییر دادنِ کندِ آن تصمیم‌هاست. در مقابل، افراد ناموفق دیر تصمیم می‌گیرند و خیلی زود و مکرر تصمیم خود را عوض می‌کنند. تعلل و به تعویق انداختن کارها، دشمن اصلی موفقیت است.</p>
-            </div>
-        </section>
-
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۰۸</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">پشتکار</h2>
-                    <span class="law-title-en">Persistence</span>
-                </div>
-            </div>
-            <div class="content">
-                <p>قدرت اراده و پایداری، مرز میان شکست و پیروزی است. بیشتر مردم با اولین نشانه‌های سختی یا مخالفت دست از کار می‌کشند. پشتکار، سوختی است که برای تبدیل اشتیاق به معادل فیزیکی‌اش نیاز دارید.</p>
-            </div>
-        </section>
-
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۰۹</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">قدرت ذهن برتر</h2>
-                    <span class="law-title-en">The Master Mind</span>
-                </div>
-            </div>
-            <div class="content">
-                <p>هیچ‌کس به‌تنهایی نمی‌تواند به ثروت کلان برسد. «ذهن برتر» یعنی اتحاد و همکاریِ هماهنگ دو یا چند نفر که برای یک هدف مشخص تلاش می‌کنند. وقتی چند ذهن با یکدیگر هماهنگ می‌شوند، نیروی سومی شکل می‌گیرد که انرژی و قدرت آن فراتر از مجموع تک‌تک افراد است.</p>
-            </div>
-        </section>
-    </div>
-
-    <!-- گروه ۴: فرکانس‌های عالی و ناخودآگاه -->
-    <div class="group-block">
-        <div class="group-header">
-            <h2>فرکانس‌های عالی و ناخودآگاه</h2>
         </div>
+    </section>
 
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۱۰</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">هدایت انرژی جنسی</h2>
-                    <span class="law-title-en">Sex Transmutation</span>
-                </div>
-            </div>
-            <div class="content">
-                <p>محرک و انرژی جنسی یکی از قوی‌ترین نیروهای فیزیکی و روانی انسان است. هنر موفقیت در این است که این انرژی عظیم را صرفاً در مسائل فیزیکی رها نکنید، بلکه آن را تغییر جهت داده و به سمتی هدایت کنید که قدرت تخیل، خلاقیت و پشتکار شما را در کار چندین برابر کند.</p>
-            </div>
-        </section>
-
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۱۱</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">ذهن ناخودآگاه</h2>
-                    <span class="law-title-en">The Subconscious Mind</span>
-                </div>
-            </div>
-            <div class="content">
-                <p>ناخودآگاه مانند یک بایگانی بزرگ است که هر فکر و احساسی را ثبت می‌کند و رابط میان ذهن شما و هوش بی‌پایان جهان است. شما نمی‌توانید ناخودآگاه را کاملاً کنترل کنید، اما می‌توانید آن را با افکار مثبت، اهداف و برنامه‌ها تغذیه کنید تا مسیر حرکتتان را به سمت هدف تنظیم کند.</p>
-            </div>
-        </section>
-
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۱۲</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">مغز</h2>
-                    <span class="law-title-en">The Brain</span>
-                </div>
-            </div>
-            <div class="content">
-                <p>هیل مغز انسان را به یک ایستگاه رادیویی تشبیه می‌کند که هم فرستنده و هم گیرنده امواج فکری است. وقتی مغز از طریق اصول قبلی — مانند اشتیاق و ذهن برتر — تحریک و فعال می‌شود، فرکانس‌های قوی‌تری ارسال و دریافت می‌کند که شرایط و افراد مناسب را به سمتتان جذب می‌کند.</p>
-            </div>
-        </section>
-
-        <section class="law-section">
-            <div class="law-header">
-                <span class="law-tag">اصل ۱۳</span>
-                <div class="law-title-wrap">
-                    <h2 class="law-title">حس ششم</h2>
-                    <span class="law-title-en">The Sixth Sense</span>
-                </div>
-            </div>
-            <div class="content">
-                <p>قله فلسفه ناپلئون هیل و آخرین اصل کتاب. حس ششم یا همان «شهود»، زمانی فعال می‌شود که ۱۲ اصل پیشین را کاملاً درک و تمرین کرده باشید. این اصل به شما اجازه می‌دهد در مواقع حساس، خطرات را پیش‌بینی کنید یا ایده‌های نجات‌بخش را به‌صورت ناگهانی دریافت کنید.</p>
-            </div>
-        </section>
-    </div>
-
-    <!-- شش شبح ترس -->
-    <div class="fears-section">
-        <h2>شش شبح ترس</h2>
-        <p>پیش از پیاده‌سازی ۱۳ اصل، باید ذهن خود را از این شش ترس اصلی پاک کنید — مهم‌ترین موانع رسیدن به ثروت و موفقیت:</p>
-        <div class="fears-grid">
-            <div class="fear-item"><span class="fear-num">۱</span> ترس از فقر</div>
-            <div class="fear-item"><span class="fear-num">۲</span> ترس از انتقاد و قضاوت دیگران</div>
-            <div class="fear-item"><span class="fear-num">۳</span> ترس از بیماری و از دست رفتن سلامتی</div>
-            <div class="fear-item"><span class="fear-num">۴</span> ترس از دست دادن عشق یا فرد عزیز</div>
-            <div class="fear-item"><span class="fear-num">۵</span> ترس از پیری و ناتوانی</div>
-            <div class="fear-item"><span class="fear-num">۶</span> ترس از مرگ</div>
+    <!-- فصل ۳ -->
+    <section class="chapter-section" data-num="03">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۳</span>
+            <h2 class="chapter-title">ایمان (Faith)</h2>
         </div>
-    </div>
+        <div class="content">
+            <p>ایمان حالتی از ذهن است که می‌توان آن را از طریق تکرار و تلقین ایجاد و تقویت کرد. وقتی ایمان با فکر ترکیب می‌شود، ناخودآگاه آن را دریافت می‌کند و به برنامه‌ای عملی تبدیل می‌کند.</p>
+            <div class="gold-quote">هر انسانی توانایی کنترل کامل ذهنش را دارد. ذهن هر چیزی که به آن بدهی می‌پذیرد، پس مراقب باش چه چیزی به آن می‌دهی.</div>
+        </div>
+    </section>
 
-    <!-- خلاصه کلی -->
-    <div class="summary-box">
-        <div class="label">خلاصه کتاب در یک نگاه</div>
-        <p>همه چیز از یک فکر و اشتیاق مشخص در ذهن شروع می‌شود، با ایمان و تلقین تقویت می‌گردد، با برنامه‌ریزی، پشتکار و کار تیمی به مرحله اجرا می‌رسد و در نهایت با پاکسازی ذهن از ترس‌ها، به ثروت و موفقیت مادی تبدیل می‌شود.</p>
-    </div>
+    <!-- فصل ۴ -->
+    <section class="chapter-section" data-num="04">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۴</span>
+            <h2 class="chapter-title">تلقین به نفس (Auto-Suggestion)</h2>
+        </div>
+        <div class="content">
+            <p>ناخودآگاه شما فقط از طریق تمرکز و احساس تغذیه می‌شود. صرف خواندن یک جمله بی‌اثر است. باید هنگام خواندن هدفت، آن را حس کنی، ببینی، لمس کنی.</p>
+            <div class="vault-box">
+                <span class="vault-box-label">تمرین روزانه</span>
+                <p>هر شب قبل از خواب و هر صبح بعد از بیدار شدن، هدف مالی‌ات را با صدای بلند بخوان و تصور کن که قبلاً به آن رسیده‌ای.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۵ -->
+    <section class="chapter-section" data-num="05">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۵</span>
+            <h2 class="chapter-title">دانش تخصصی (Specialized Knowledge)</h2>
+        </div>
+        <div class="content">
+            <p>دانش عمومی هرچقدر هم زیاد باشد، به تنهایی ثروت نمی‌سازد. هنری فورد تحصیلات رسمی نداشت، اما می‌دانست چطور متخصصان را دور خودش جمع کند.</p>
+            <div class="gold-quote">دانش باید سازمان‌یافته و هدفمند به کار گرفته شود. دانش تخصصی یا باید خودت داشته باشی یا از طریق ذهن جمعی (Master Mind) به دست بیاری.</div>
+        </div>
+    </section>
+
+    <!-- فصل ۶ -->
+    <section class="chapter-section" data-num="06">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۶</span>
+            <h2 class="chapter-title">تخیل (Imagination)</h2>
+        </div>
+        <div class="content">
+            <p>دو نوع تخیل داریم:</p>
+            <div class="vault-box">
+                <span class="vault-box-label">تخیل ترکیبی</span>
+                <p>ایده‌های موجود را به شکل جدید کنار هم می‌گذارد.</p>
+            </div>
+            <div class="vault-box">
+                <span class="vault-box-label">تخیل خلاق</span>
+                <p>از ناخودآگاه ایده‌های کاملاً جدید می‌گیرد.</p>
+            </div>
+            <div class="gold-quote">تمام ثروت‌ها اول در ذهن ساخته شدند. ایده یک محصول جدید، یک خدمت بهتر، یک روش متفاوت — همه اینها با تخیل شروع می‌شوند.</div>
+        </div>
+    </section>
+
+    <!-- فصل ۷ -->
+    <section class="chapter-section" data-num="07">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۷</span>
+            <h2 class="chapter-title">برنامه‌ریزی سازمان‌یافته (Organized Planning)</h2>
+        </div>
+        <div class="content">
+            <p>اشتیاق بدون برنامه، رویاپردازی است. باید یک برنامه مشخص داشته باشی. اگر اولین برنامه شکست خورد، یک برنامه جدید بساز. شکست موقتی است، نه دائمی.</p>
+            <div class="vault-box">
+                <span class="vault-box-label">تفاوت رهبر و پیرو</span>
+                <p>رهبر شجاعت دارد، خودکنترل است، عدالت دارد، تصمیم‌گیر است، برنامه‌ریز است، بیشتر از دیگران کار می‌کند، شخصیت دارد و همدلی.</p>
+            </div>
+            <div class="vault-box">
+                <span class="vault-box-label">مهم‌ترین دلایل شکست</span>
+                <p>نداشتن هدف مشخص، فقدان بلندپروازی، فقدان انضباط شخصی، و اهمال‌کاری. هیل در مجموع ۳۱ دلیل شکست را فهرست می‌کند.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۸ -->
+    <section class="chapter-section" data-num="08">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۸</span>
+            <h2 class="chapter-title">تصمیم‌گیری (Decision)</h2>
+        </div>
+        <div class="content">
+            <p>اهمال‌کاری دشمن شماره یک موفقیت است. تحلیل هیل از ۲۵۰۰۰ نفر نشان داد: افراد موفق تصمیم می‌گیرند سریع و آن را آهسته تغییر می‌دهند. افراد شکست‌خورده دیر تصمیم می‌گیرند و زود عوضش می‌کنند.</p>
+            <div class="vault-box">
+                <span class="vault-box-label">داستان اعلام استقلال آمریکا</span>
+                <p>۵۶ نفر در یک اتاق جمع شدند و یکی از جسورانه‌ترین تصمیمات تاریخ را گرفتند. می‌دانستند که اگر شکست بخورند اعدام می‌شوند. اما تصمیم گرفتند. نظر دیگران اهمیتی ندارد.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۹ -->
+    <section class="chapter-section" data-num="09">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۹</span>
+            <h2 class="chapter-title">پشتکار (Persistence)</h2>
+        </div>
+        <div class="content">
+            <p>پشتکار یعنی تبدیل اشتیاق به عادت. چهار عامل برای ساختن پشتکار: هدف مشخص، برنامه مشخص، ذهن بسته در برابر افکار منفی، و داشتن یک گروه هم‌فکر (Master Mind).</p>
+            <div class="vault-box">
+                <span class="vault-box-label">۸ ضعفی که پشتکار را نابود می‌کنند</span>
+                <p>ناتوانی در شناخت و تعریف دقیق آنچه می‌خواهی، اهمال‌کاری، فقدان علاقه به یادگیری، بی‌تصمیمی، عادت به بهانه‌تراشی، تنبلی، تسلیم شدن در برابر شکست، و نداشتن برنامه مکتوب.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۱۰ -->
+    <section class="chapter-section" data-num="10">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۱۰</span>
+            <h2 class="chapter-title">قدرت ذهن جمعی (Master Mind)</h2>
+        </div>
+        <div class="content">
+            <p>ذهن جمعی یعنی هماهنگی دو یا چند ذهن برای رسیدن به یک هدف مشخص. وقتی دو ذهن با هم ترکیب می‌شوند، یک ذهن سوم نامرئی شکل می‌گیرد که قوی‌تر از هر دوی آنهاست.</p>
+            <div class="vault-box">
+                <span class="vault-box-label">راز اندرو کارنگی</span>
+                <p>اندرو کارنگی گروه ۵۰ نفره‌ای داشت که همه در یک جهت فکر می‌کردند. این رمز ثروت او بود.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۱۱ -->
+    <section class="chapter-section" data-num="11">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۱۱</span>
+            <h2 class="chapter-title">رمز جنسی (The Mystery of Sex Transmutation)</h2>
+        </div>
+        <div class="content">
+            <p>انرژی جنسی قوی‌ترین انگیزه انسانی است. اما این انرژی می‌تواند به جای صرف شدن، تبدیل شده (Transmute) و به خلاقیت، هنر، تجارت یا هر هدف بلندمدت دیگری تبدیل شود.</p>
+            <div class="gold-quote">بیشتر مردان بزرگ تاریخ این انرژی را نه سرکوب، بلکه هدایت کردند. هیل می‌گوید مردی که نمی‌تواند این انرژی را کنترل کند، هرگز نمی‌تواند دیگران را هم کنترل کند.</div>
+        </div>
+    </section>
+
+    <!-- فصل ۱۲ -->
+    <section class="chapter-section" data-num="12">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۱۲</span>
+            <h2 class="chapter-title">ناخودآگاه (The Subconscious Mind)</h2>
+        </div>
+        <div class="content">
+            <p>ناخودآگاه مثل یک زمین حاصلخیز است که هر بذری در آن بکاری رشد می‌کند، چه مثبت چه منفی.</p>
+            <div class="vault-box">
+                <span class="vault-box-label">هفت احساس مثبت</span>
+                <p>اشتیاق، ایمان، عشق، جنسیت، امید، رمانس، شکوه — اینها را به ناخودآگاهت بده.</p>
+            </div>
+            <div class="vault-box">
+                <span class="vault-box-label">هفت احساس منفی</span>
+                <p>ترس، حسادت، نفرت، انتقام، حرص، خرافات، خشم — از اینها فرار کن.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۱۳ -->
+    <section class="chapter-section" data-num="13">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۱۳</span>
+            <h2 class="chapter-title">مغز (The Brain)</h2>
+        </div>
+        <div class="content">
+            <p>مغز انسان یک دستگاه فرستنده و گیرنده است. فکر به صورت ارتعاش از یک ذهن به ذهن دیگر منتقل می‌شود. هرچه ذهن قوی‌تر باشد، ارتعاشش قوی‌تر است.</p>
+            <div class="gold-quote">به همین دلیل افراد با انرژی بالا و اشتیاق زیاد، ایده‌های بهتری دریافت می‌کنند.</div>
+        </div>
+    </section>
+
+    <!-- فصل ۱۴ -->
+    <section class="chapter-section" data-num="14">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۱۴</span>
+            <h2 class="chapter-title">حس ششم (The Sixth Sense)</h2>
+        </div>
+        <div class="content">
+            <p>وقتی تمام اصول قبلی را تمرین کردی، به مرحله‌ای می‌رسی که ذهن ناخودآگاه شروع به ارسال پیام می‌کند؛ یک احساس درونی، یک الهام، یک هشدار.</p>
+            <div class="vault-box">
+                <span class="vault-box-label">شورای مشاوران تخیلی هیل</span>
+                <p>هیل می‌گوید شورای مشاوران تخیلی داشت؛ شخصیت‌هایی مثل لینکلن، ناپلئون، داوینچی که هر شب قبل از خواب با آنها «مشاوره» می‌کرد و از آنها الهام می‌گرفت.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۱۵ -->
+    <section class="chapter-section" data-num="15">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۱۵</span>
+            <h2 class="chapter-title">شش ترس اصلی</h2>
+        </div>
+        <div class="content">
+            <p>شش ترسی که انسان را نابود می‌کنند:</p>
+            <ul class="law-list">
+                <li><span class="num">۱</span> ترس از فقر — فلج‌کننده‌ترین و مهم‌ترین</li>
+                <li><span class="num">۲</span> ترس از انتقاد</li>
+                <li><span class="num">۳</span> ترس از بیماری</li>
+                <li><span class="num">۴</span> ترس از از دست دادن عشق</li>
+                <li><span class="num">۵</span> ترس از پیری</li>
+                <li><span class="num">۶</span> ترس از مرگ</li>
+            </ul>
+            <div class="vault-box">
+                <span class="vault-box-label">راه حل</span>
+                <p>تشخیص ترس، پذیرش آن و سپس عمل کردن علی‌رغم وجود ترس. مهم‌ترین آنها ترس از فقر است چون فلج‌کننده‌ترین است.</p>
+            </div>
+        </div>
+    </section>
 
 </div>
 
 <footer>
+    <span class="footer-coin">✦</span>
     این خلاصه با هدف ارتقای آگاهی و درک عمیق‌تر مفاهیم کتاب تهیه شده است.
-    <div class="tagline">«افکار به ثروت تبدیل می‌شوند.»</div>
+    <div class="tagline">«هر چیزی که ذهنت تصور کند و قلبت باور داشته باشد، به دست خواهی آورد.»</div>
 </footer>
 
 </body>
