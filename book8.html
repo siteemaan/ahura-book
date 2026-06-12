@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>انسان در جستجوی هویت خویشتن — کارل یونگ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:           #0c0a14;
+            --bg-card:      #161222;
+            --bg-mid:       #1c1730;
+            --accent:       #7c5cbf;
+            --accent-dim:   rgba(124, 92, 191, 0.12);
+            --accent-light: #a78bdb;
+            --gold:         #b3a06a;
+            --gold-dim:     rgba(179, 160, 106, 0.10);
+            --text:         #e8e4f0;
+            --text-muted:   #8b84a3;
+            --border:       #261f3d;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.95;
+            overflow-x: hidden;
+        }
+
+        /* ─── TOPBAR ─── */
+        .topbar {
+            padding: 16px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+        .back-btn {
+            text-decoration: none;
+            color: var(--accent-light);
+            font-size: 0.88rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: opacity 0.2s;
+        }
+        .back-btn:hover { opacity: 0.65; }
+        .back-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 85px 24px 65px;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+        /* لایه‌های دایره‌ای محو، مثل امواج ناخودآگاه */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 900px;
+            height: 900px;
+            transform: translate(-50%, -50%);
+            background:
+                radial-gradient(circle, transparent 30%, rgba(124,92,191,0.05) 31%, transparent 32%),
+                radial-gradient(circle, transparent 45%, rgba(179,160,106,0.04) 46%, transparent 47%),
+                radial-gradient(circle, transparent 60%, rgba(124,92,191,0.03) 61%, transparent 62%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            color: var(--gold);
+            text-transform: uppercase;
+            border: 1px solid rgba(179,160,106,0.3);
+            border-radius: 4px;
+            padding: 5px 14px;
+            margin-bottom: 28px;
+            background: var(--gold-dim);
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            font-size: 2.75rem;
+            font-weight: 900;
+            line-height: 1.4;
+            letter-spacing: -1px;
+            margin-bottom: 14px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent-light);
+        }
+
+        .hero-sub {
+            position: relative;
+            z-index: 1;
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            font-weight: 300;
+            margin-bottom: 36px;
+        }
+
+        .hero-quote {
+            position: relative;
+            z-index: 1;
+            max-width: 580px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 1.0rem;
+            font-style: italic;
+            font-weight: 300;
+            line-height: 1.9;
+            border-right: 3px solid var(--gold);
+            padding-right: 18px;
+            text-align: right;
+        }
+
+        /* ─── CONTAINER ─── */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 75px 28px 60px;
+        }
+
+        /* ─── PART HEADER (بخش اول، دوم...) ─── */
+        .part-header {
+            margin-bottom: 40px;
+        }
+        .part-header .part-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .part-header h2 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* ─── SECTION ─── */
+        .law-section {
+            margin-bottom: 75px;
+            padding-bottom: 75px;
+            border-bottom: 1px solid var(--border);
+        }
+        .law-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .content p {
+            color: #cbc6dd;
+            font-size: 1.0rem;
+            font-weight: 300;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        .content p:last-child { margin-bottom: 0; }
+
+        /* ─── باکس مفهوم (مثل story-box ولی نسخه یونگی) ─── */
+        .concept-box {
+            position: relative;
+            background: var(--bg-mid);
+            border: 1px solid var(--border);
+            border-right: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 26px 28px;
+            margin: 26px 0;
+        }
+        .concept-box-label {
+            position: absolute;
+            top: -11px;
+            right: 20px;
+            font-size: 0.65rem;
+            font-weight: 900;
+            letter-spacing: 2.5px;
+            color: var(--gold);
+            background: var(--bg-mid);
+            padding: 0 8px;
+            text-transform: uppercase;
+        }
+        .concept-box p {
+            color: var(--text-muted);
+            font-size: 0.96rem;
+            line-height: 1.9;
+            margin-bottom: 0;
+        }
+
+        /* ─── کهن‌الگوها — کارت‌های شبکه‌ای ─── */
+        .archetype-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            margin-top: 30px;
+        }
+        .archetype-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px 24px;
+            transition: border-color 0.25s ease;
+        }
+        .archetype-card:hover {
+            border-color: rgba(124,92,191,0.4);
+        }
+        .archetype-head {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .archetype-num {
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--accent-dim);
+            color: var(--accent-light);
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .archetype-title {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .archetype-title-en {
+            font-size: 0.78rem;
+            color: var(--gold);
+            font-weight: 400;
+            opacity: 0.75;
+            direction: ltr;
+            unicode-bidi: embed;
+        }
+        .archetype-card p {
+            color: #b9b3cf;
+            font-size: 0.94rem;
+            font-weight: 300;
+            line-height: 1.85;
+            margin-bottom: 0;
+            padding-right: 42px;
+        }
+
+        /* ─── فهرست مسیر فردیت ─── */
+        .path-list {
+            margin: 28px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .path-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 18px;
+        }
+        .path-icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: var(--gold-dim);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+        .path-text {
+            color: #cbc6dd;
+            font-size: 0.96rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* ─── لیست نمونه‌های اسطوره ─── */
+        .myth-list {
+            margin: 26px 0;
+            padding-right: 22px;
+            border-right: 2px solid rgba(179,160,106,0.25);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .myth-item {
+            color: #cbc6dd;
+            font-size: 0.96rem;
+            font-weight: 300;
+            line-height: 1.85;
+        }
+        .myth-item strong {
+            color: var(--accent-light);
+            font-weight: 600;
+        }
+
+        /* ─── جمع‌بندی نهایی ─── */
+        .final-box {
+            background: linear-gradient(135deg, var(--bg-mid), var(--bg-card));
+            border: 1px solid rgba(179,160,106,0.22);
+            border-radius: 12px;
+            padding: 36px 32px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .final-box .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+        .final-box p {
+            color: #d6d2e6;
+            font-size: 1.0rem;
+            font-weight: 300;
+            line-height: 2.05;
+            text-align: justify;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            text-align: center;
+            padding: 55px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.87rem;
+            margin-top: 60px;
+        }
+        footer .tagline {
+            color: var(--accent-light);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    <a href="index.html" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        بازگشت به کتابخانه
+    </a>
+</div>
+
+<div class="hero">
+    <div class="hero-badge">تحلیل کامل کتاب</div>
+    <h1>انسان در جستجوی <em>هویت خویشتن</em></h1>
+    <p class="hero-sub">اثر کارل گوستاو یونگ — سفری به اعماق ناخودآگاه</p>
+    <p class="hero-quote">روان انسان مثل یک کوه یخ است؛ آنچه می‌بینیم فقط نوک آن است.</p>
+</div>
+
+<div class="container">
+
+    <!-- مقدمه -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">مقدمه</span>
+            <h2>یونگ کیست و چرا مهم است؟</h2>
+        </div>
+        <div class="content">
+            <p>کارل گوستاو یونگ، روانپزشک سوئیسی، شاگرد و بعدها رقیب فروید بود. اگر فروید می‌گفت همه‌چیز به سکس برمی‌گردد، یونگ گفت: «نه، انسان از این پیچیده‌تر است.»</p>
+            <div class="concept-box">
+                <span class="concept-box-label">ایده محوری</span>
+                <p>یونگ کشف کرد روان انسان مثل یک کوه یخ است؛ آنچه می‌بینیم فقط نوک آن است. زیر سطح آگاهی، دنیایی پنهان وجود دارد که رفتار، احساسات و سرنوشت ما را شکل می‌دهد.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش اول: ناخودآگاه -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">بخش اول</span>
+            <h2>ناخودآگاه چیست؟</h2>
+        </div>
+        <div class="content">
+            <p>ذهن تو فقط همان چیزی نیست که از آن آگاهی. زیر این آگاهی، یک دریای عمیق وجود دارد که خودت هم نمی‌دانی آنجاست، اما هر روز تصمیم‌ها، احساسات و واکنش‌هایت را کنترل می‌کند. این دریا دو لایه دارد:</p>
+            <div class="path-list">
+                <div class="path-item">
+                    <span class="path-icon">۱</span>
+                    <span class="path-text"><strong style="color: var(--accent-light); font-weight: 600;">ناخودآگاه شخصی:</strong> همه‌چیزهایی که تجربه کردی اما فراموش یا سرکوب کردی؛ مثل یک تحقیر در کودکی که فکر می‌کنی فراموشش کردی، اما هنوز رفتارت را شکل می‌دهد.</span>
+                </div>
+                <div class="path-item">
+                    <span class="path-icon">۲</span>
+                    <span class="path-text"><strong style="color: var(--accent-light); font-weight: 600;">ناخودآگاه جمعی:</strong> کشف بزرگ یونگ. زیر ناخودآگاه شخصی، لایه‌ای عمیق‌تر هست که بین همه انسان‌ها مشترک است؛ میراثی روانی از نسل‌های گذشته. به همین دلیل اسطوره‌های ملت‌های بی‌ارتباط با هم، شبیه یکدیگرند.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش دوم: کهن‌الگوها -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">بخش دوم</span>
+            <h2>کهن‌الگوها چیستند؟</h2>
+        </div>
+        <div class="content">
+            <p>در ناخودآگاه جمعی، الگوهای ثابتی وجود دارند که همه انسان‌ها در همه دوران‌ها آن‌ها را می‌شناسند؛ یونگ این‌ها را کهن‌الگو یا آرکی‌تایپ می‌نامد — نقشه‌ای روانی که در عمق روح حک شده است.</p>
+            <div class="concept-box">
+                <span class="concept-box-label">چرا مهم است</span>
+                <p>این الگوها بدون آنکه بدانی، رفتار و تصمیم‌هایت را هدایت می‌کنند. وقتی عاشق یک شخصیت داستانی می‌شوی، وقتی یک رهبر را می‌پرستی، یا از چیزی بی‌دلیل می‌ترسی — کهن‌الگوها در کارند.</p>
+            </div>
+
+            <div class="archetype-grid">
+                <div class="archetype-card">
+                    <div class="archetype-head">
+                        <span class="archetype-num">۱</span>
+                        <span class="archetype-title">پرسونا — ماسک اجتماعی</span>
+                    </div>
+                    <p><span class="archetype-title-en">Persona</span><br>پرسونا در لاتین یعنی ماسک. همه ما یک ماسک اجتماعی داریم: در محل کار یک‌جور رفتار می‌کنیم، با دوستان جور دیگر، با خانواده جور دیگر. این ماسک ضروری اما خطرناک است؛ اگر آن‌قدر با ماسکت یکی شوی که خودت را فراموش کنی، دیگر نمی‌دانی واقعاً کی هستی.</p>
+                </div>
+
+                <div class="archetype-card">
+                    <div class="archetype-head">
+                        <span class="archetype-num">۲</span>
+                        <span class="archetype-title">سایه — تاریک‌ترین بخش وجود</span>
+                    </div>
+                    <p><span class="archetype-title-en">Shadow</span><br>مهم‌ترین مفهوم یونگ؛ در ادامه به‌طور مستقل و کامل بررسی می‌شود.</p>
+                </div>
+
+                <div class="archetype-card">
+                    <div class="archetype-head">
+                        <span class="archetype-num">۳</span>
+                        <span class="archetype-title">آنیما و آنیموس</span>
+                    </div>
+                    <p><span class="archetype-title-en">Anima & Animus</span><br>در ناخودآگاه هر مردی، یک بُعد زنانه (آنیما) و در ناخودآگاه هر زنی، یک بُعد مردانه (آنیموس) وجود دارد. این بُعد پنهان روی نوع کسی که عاشقش می‌شوی تأثیر می‌گذارد؛ شیفتگی ناگهانی اغلب بازتاب همین بخش درونی است.</p>
+                </div>
+
+                <div class="archetype-card">
+                    <div class="archetype-head">
+                        <span class="archetype-num">۴</span>
+                        <span class="archetype-title">خود — مرکز کامل وجود</span>
+                    </div>
+                    <p><span class="archetype-title-en">The Self</span><br>بالاترین کهن‌الگو. «خود» مرکز تمام روان است، نه فقط آگاهی. هدف زندگی از نظر یونگ رسیدن به «فردیت» است — یکپارچه کردن تمام بخش‌های وجود، هم روشنایی هم تاریکی.</p>
+                </div>
+
+                <div class="archetype-card">
+                    <div class="archetype-head">
+                        <span class="archetype-num">۵</span>
+                        <span class="archetype-title">پیر خردمند</span>
+                    </div>
+                    <p><span class="archetype-title-en">The Wise Old Man</span><br>کهن‌الگوی راهنما، استاد و خردمند. در داستان‌ها به شکل جادوگر، پیامبر یا راهنما ظاهر می‌شود؛ در ذهن تو همان صدای درونی است که وقتی گم می‌شوی، راهنمایی‌ات می‌کند.</p>
+                </div>
+
+                <div class="archetype-card">
+                    <div class="archetype-head">
+                        <span class="archetype-num">۶</span>
+                        <span class="archetype-title">مادر بزرگ</span>
+                    </div>
+                    <p><span class="archetype-title-en">The Great Mother</span><br>کهن‌الگوی مراقبت و تغذیه، اما هم‌زمان بلعیدن و نابودی. در اسطوره‌ها هم به شکل الهه محبت است، هم جادوگر بدخواه.</p>
+                </div>
+
+                <div class="archetype-card">
+                    <div class="archetype-head">
+                        <span class="archetype-num">۷</span>
+                        <span class="archetype-title">قهرمان</span>
+                    </div>
+                    <p><span class="archetype-title-en">The Hero</span><br>کهن‌الگویی که همه انسان‌ها با آن آشنایند: «سفر قهرمان» — کسی که از دنیای عادی خارج می‌شود، با اژدها روبرو می‌شود (نماد سایه خودش) و پیروز برمی‌گردد. این داستان در همه فرهنگ‌ها تکرار شده چون از ناخودآگاه جمعی می‌آید.</p>
+                </div>
+
+                <div class="archetype-card">
+                    <div class="archetype-head">
+                        <span class="archetype-num">۸</span>
+                        <span class="archetype-title">کودک الهی</span>
+                    </div>
+                    <p><span class="archetype-title-en">The Divine Child</span><br>نماد نو شدن، امید و آغاز دوباره. در داستان‌ها به شکل کودکی ظاهر می‌شود که قرار است نجات‌دهنده باشد.</p>
+                </div>
+
+                <div class="archetype-card">
+                    <div class="archetype-head">
+                        <span class="archetype-num">۹</span>
+                        <span class="archetype-title">تریکستر — شیطنت‌کار</span>
+                    </div>
+                    <p><span class="archetype-title-en">The Trickster</span><br>کهن‌الگوی شوخ و قانون‌شکن؛ لوکی در اساطیر نورس، هرمس در یونانی. در زندگی واقعی، وقتی ناگهان هوس می‌کنی همه‌چیز را رها کنی و کار دیوانه‌واری بکنی، تریکستر درونت فعال شده.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش سوم: سایه -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">بخش سوم — مهم‌ترین مفهوم یونگ</span>
+            <h2>سایه (Shadow)</h2>
+        </div>
+        <div class="content">
+            <p>سایه همه‌چیزهایی است که در خودت می‌بینی اما دوست نداری ببینی؛ همه آن چیزهایی که در کودکی به تو گفتند «بد است» و تو آن‌ها را پنهان کردی — خشم، حسادت، شهوت، بخل، میل به قدرت، ترس از ضعف. برای اینکه «آدم خوبی» به نظر برسی، این‌ها را هم از دیگران پنهان کردی هم از خودت. اما آن‌ها نرفتند؛ فقط رفتند توی سایه.</p>
+
+            <div class="concept-box">
+                <span class="concept-box-label">سایه چطور خودش را نشان می‌دهد</span>
+                <p>وقتی بی‌دلیل از کسی متنفر می‌شوی، احتمالاً او چیزی دارد که در خودت سرکوب کرده‌ای. وقتی درباره کسی قضاوت تندی می‌کنی، اغلب درباره سایه خودت حرف می‌زنی. کسی که دائم از «بی‌صداقتی» دیگران شکایت می‌کند، اغلب با خودش صادق نیست.</p>
+            </div>
+
+            <p>سایه می‌تواند مثبت هم باشد: خیلی از مردم استعدادها، جاه‌طلبی و قدرتشان را هم در سایه پنهان کرده‌اند، چون یاد گرفته‌اند «فروتن» باشند یا «توقع زیاد نداشته باشند».</p>
+
+            <div class="concept-box">
+                <span class="concept-box-label">راه‌حل یونگ — یکپارچه‌سازی</span>
+                <p>نه سرکوب، نه رها کردن کامل؛ بلکه دیدن، پذیرفتن و هدایت کردن. وقتی سایه را می‌بینی و می‌پذیری، دیگر کنترلت را ندارد. آن خشم می‌تواند تبدیل به قدرت شود، آن حسادت می‌تواند نشان‌دهنده چیزی باشد که واقعاً می‌خواهی. اگر سایه را نشناسی، او زندگی‌ات را کنترل می‌کند.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش چهارم: فردیت -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">بخش چهارم — هدف نهایی</span>
+            <h2>فردیت (Individuation)</h2>
+        </div>
+        <div class="content">
+            <p>فردیت یعنی تبدیل شدن به کامل‌ترین نسخه خودت؛ نه نسخه‌ای که پدر و مادرت می‌خواستند، نه نسخه‌ای که جامعه تأیید می‌کند، بلکه کسی که واقعاً هستی — با تمام روشنایی‌ها و تاریکی‌هایت. این مسیر شامل چهار گام است:</p>
+            <div class="path-list">
+                <div class="path-item">
+                    <span class="path-icon">۱</span>
+                    <span class="path-text">شناختن پرسونا و اینکه ماسکت کی هست</span>
+                </div>
+                <div class="path-item">
+                    <span class="path-icon">۲</span>
+                    <span class="path-text">روبرو شدن با سایه و پذیرفتنش</span>
+                </div>
+                <div class="path-item">
+                    <span class="path-icon">۳</span>
+                    <span class="path-text">یکپارچه کردن آنیما یا آنیموس</span>
+                </div>
+                <div class="path-item">
+                    <span class="path-icon">۴</span>
+                    <span class="path-text">رسیدن به «خود» که مرکز کامل وجود است</span>
+                </div>
+            </div>
+            <p>یونگ می‌گوید این سفر درونی سخت‌ترین سفری است که آدم می‌تواند داشته باشد. خیلی‌ها ترجیح می‌دهند همه عمر با ماسک زندگی کنند تا اینکه با سایه‌شان روبرو شوند.</p>
+        </div>
+    </section>
+
+    <!-- بخش پنجم: اسطوره و هنر -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">بخش پنجم</span>
+            <h2>رابطه با اسطوره‌ها، مذهب و هنر</h2>
+        </div>
+        <div class="content">
+            <p>یونگ می‌گوید دلیل اینکه همه انسان‌ها به داستان، اسطوره و مذهب نیاز دارند این است که این‌ها زبان ناخودآگاه جمعی هستند. وقتی داستانی تو را به گریه وامی‌دارد، یعنی یک کهن‌الگو در عمق وجودت لمس شده.</p>
+            <div class="myth-list">
+                <div class="myth-item"><strong>سفر قهرمان:</strong> داستانی مثل سفر یک شخصیت سینمایی در یک حماسه فضایی، همه را تحت تأثیر می‌گذارد چون از یک کهن‌الگوی مشترک می‌آید.</div>
+                <div class="myth-item"><strong>موسیقی بدون کلام:</strong> می‌تواند گریه‌ات را در بیاورد، چون مستقیم با ناخودآگاه حرف می‌زند.</div>
+                <div class="myth-item"><strong>رهبران کاریزماتیک:</strong> می‌توانند میلیون‌ها نفر را جادو کنند، چون کهن‌الگوی پیر خردمند یا قهرمان را در مردم فعال می‌کنند.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- جمع‌بندی -->
+    <div class="final-box">
+        <div class="label">پیام اصلی یونگ</div>
+        <p>بزرگ‌ترین ماجراجویی که هر انسانی می‌تواند داشته باشد، سفر به درون خودش است. بیشتر مشکلات روانی، بیشتر روابط خراب، بیشتر تصمیم‌های بد — ریشه‌شان در نشناختن خود است. آدمی که سایه‌اش را نمی‌شناسد، ناخواسته تاریکی‌اش را روی دیگران می‌ریزد. آدمی که پرسونایش را با خودش اشتباه می‌گیرد، وقتی تنها می‌ماند نمی‌داند کیست.</p>
+    </div>
+
+</div>
+
+<footer>
+    این خلاصه با هدف ارتقای آگاهی و درک عمیق‌تر مفاهیم کتاب تهیه شده است.
+    <div class="tagline">«تا ناخودآگاه را آگاه نکنی، آن سرنوشت تو را هدایت خواهد کرد.»</div>
+</footer>
+
+</body>
+</html>
