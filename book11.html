@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هنر جنگ — سون تزو</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:           #000000;
+            --bg-card:      #080808;
+            --bg-mid:       #0f0f0f;
+            --gold:         #b8860b;
+            --gold-light:   #d4a843;
+            --gold-bright:  #f0c040;
+            --gold-dim:     rgba(184, 134, 11, 0.08);
+            --gold-border:  rgba(184, 134, 11, 0.18);
+            --gold-vein:    rgba(212, 168, 67, 0.12);
+            --text:         #e8e0cc;
+            --text-muted:   #6a5a3a;
+            --border:       #1a1a1a;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.95;
+            overflow-x: hidden;
+        }
+
+        /* ─── رگه‌های طلایی SVG پس‌زمینه ─── */
+        .gold-veins {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 1;
+        }
+
+        /* ─── TOPBAR ─── */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 16px 36px;
+            border-bottom: 1px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            background: rgba(0,0,0,0.97);
+            backdrop-filter: blur(10px);
+        }
+        .back-btn {
+            text-decoration: none;
+            color: var(--gold-light);
+            font-size: 0.88rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.2s;
+        }
+        .back-btn:hover { opacity: 0.6; }
+        .back-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 100px 24px 85px;
+            border-bottom: 1px solid var(--gold-border);
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-light), transparent);
+        }
+
+        .hero-chinese {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 3.5rem;
+            color: rgba(184,134,11,0.15);
+            letter-spacing: 12px;
+            display: block;
+            margin-bottom: 30px;
+            line-height: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            color: var(--gold);
+            text-transform: uppercase;
+            border: 1px solid var(--gold-border);
+            padding: 5px 20px;
+            margin-bottom: 26px;
+            background: var(--gold-dim);
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.05;
+            color: #ffffff;
+            margin-bottom: 6px;
+            letter-spacing: -2px;
+            position: relative;
+        }
+
+        .hero h1 span {
+            color: var(--gold-light);
+            display: block;
+        }
+
+        .hero-sub {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            font-weight: 300;
+            margin: 16px 0 42px;
+            letter-spacing: 2px;
+        }
+
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin: 0 auto 40px;
+            max-width: 400px;
+        }
+        .hdl {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to left, var(--gold), transparent);
+        }
+        .hdl:last-child { background: linear-gradient(to right, var(--gold), transparent); }
+        .hdc {
+            width: 6px; height: 6px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            margin: 0 12px;
+        }
+
+        .hero-quote {
+            max-width: 620px;
+            margin: 0 auto;
+            color: #c0a870;
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.95;
+            font-style: italic;
+            border: 1px solid var(--gold-border);
+            padding: 24px 32px;
+            background: var(--gold-dim);
+            position: relative;
+        }
+
+        .hero-quote::before {
+            content: '孫子兵法';
+            position: absolute;
+            top: -13px;
+            right: 20px;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.7rem;
+            color: var(--gold);
+            background: var(--bg);
+            padding: 0 8px;
+            letter-spacing: 4px;
+        }
+
+        /* ─── CONTAINER ─── */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 840px;
+            margin: 0 auto;
+            padding: 80px 32px 110px;
+        }
+
+        /* ─── CHAPTER SECTION ─── */
+        .chapter-section {
+            margin-bottom: 85px;
+            padding-bottom: 85px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+        .chapter-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* شماره چینی پس‌زمینه */
+        .chapter-section::before {
+            content: attr(data-cn);
+            position: absolute;
+            top: -10px;
+            left: -5px;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 8rem;
+            color: rgba(184,134,11,0.04);
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .chapter-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .chapter-tag {
+            flex-shrink: 0;
+            font-size: 0.62rem;
+            font-weight: 900;
+            letter-spacing: 2.5px;
+            color: var(--gold);
+            background: var(--gold-dim);
+            border: 1px solid var(--gold-border);
+            border-top: 2px solid var(--gold);
+            padding: 6px 13px;
+            margin-top: 4px;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        .chapter-title-wrap {}
+        .chapter-title {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.4;
+            margin-bottom: 4px;
+        }
+        .chapter-title-en {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        /* ─── CONTENT ─── */
+        .content p {
+            color: #c8bfa0;
+            font-size: 1.0rem;
+            font-weight: 300;
+            text-align: justify;
+            margin-bottom: 22px;
+            line-height: 2.05;
+        }
+        .content p:last-child { margin-bottom: 0; }
+
+        /* ─── STRATEGY BOX ─── */
+        .strategy-box {
+            position: relative;
+            background: var(--bg-mid);
+            border: 1px solid var(--border);
+            border-right: 3px solid var(--gold);
+            padding: 26px 30px 24px;
+            margin: 28px 0;
+            box-shadow: inset 0 0 60px rgba(184,134,11,0.03);
+        }
+
+        .strategy-box-label {
+            position: absolute;
+            top: -10px;
+            right: 16px;
+            font-size: 0.58rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: var(--gold);
+            background: var(--bg-mid);
+            padding: 0 10px;
+            text-transform: uppercase;
+        }
+
+        .strategy-box p,
+        .strategy-box {
+            color: var(--text-muted);
+            font-size: 0.96rem;
+            line-height: 2;
+        }
+
+        /* ─── نقل‌قول طلایی ─── */
+        .gold-quote {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--gold-bright);
+            padding: 20px 24px;
+            margin: 28px 0;
+            line-height: 1.85;
+            font-style: italic;
+            position: relative;
+            background: var(--gold-dim);
+            border-right: 3px solid var(--gold-bright);
+        }
+
+        .gold-quote::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--gold);
+            opacity: 0.3;
+            position: absolute;
+            top: 8px;
+            right: 14px;
+            line-height: 1;
+            font-family: Georgia, serif;
+        }
+
+        /* ─── لیست پنج عامل ─── */
+        .factor-list {
+            list-style: none;
+            margin: 22px 0;
+            padding: 0;
+            border: 1px solid var(--border);
+        }
+        .factor-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .factor-item:last-child { border-bottom: none; }
+        .factor-num {
+            flex-shrink: 0;
+            width: 48px;
+            text-align: center;
+            padding: 18px 0;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            background: var(--gold-dim);
+            border-left: 1px solid var(--border);
+            align-self: stretch;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .factor-body {
+            padding: 18px 22px;
+        }
+        .factor-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: 6px;
+        }
+        .factor-desc {
+            font-size: 0.92rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.85;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 60px 24px;
+            border-top: 1px solid var(--gold-border);
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        footer::before {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto 20px;
+        }
+
+        .footer-chinese {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            letter-spacing: 8px;
+            opacity: 0.5;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        footer .tagline {
+            color: var(--gold-light);
+            font-size: 1.0rem;
+            font-weight: 500;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 3rem; }
+            .container { padding-right: 18px; padding-left: 18px; }
+            .hero-chinese { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- رگه‌های طلایی پس‌زمینه -->
+<svg class="gold-veins" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,200 Q200,180 350,220 T700,190 T1100,210 T1440,195" stroke="rgba(184,134,11,0.07)" stroke-width="1.5" fill="none"/>
+    <path d="M0,450 Q300,420 500,460 T900,440 T1200,455 T1440,445" stroke="rgba(184,134,11,0.05)" stroke-width="1" fill="none"/>
+    <path d="M0,700 Q250,680 450,710 T800,695 T1150,705 T1440,698" stroke="rgba(184,134,11,0.06)" stroke-width="1.2" fill="none"/>
+    <path d="M300,0 Q320,200 290,400 T310,700 T295,900" stroke="rgba(184,134,11,0.04)" stroke-width="1" fill="none"/>
+    <path d="M900,0 Q920,150 880,350 T910,600 T890,900" stroke="rgba(184,134,11,0.035)" stroke-width="0.8" fill="none"/>
+    <path d="M100,100 Q400,80 600,120 T950,95 T1300,110" stroke="rgba(212,168,67,0.04)" stroke-width="0.6" fill="none"/>
+    <path d="M0,580 Q350,555 580,590 T1050,570 T1440,582" stroke="rgba(212,168,67,0.05)" stroke-width="0.9" fill="none"/>
+    <path d="M600,0 Q580,300 620,500 T595,900" stroke="rgba(184,134,11,0.03)" stroke-width="0.7" fill="none"/>
+</svg>
+
+<div class="topbar">
+    <a href="index.html" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        بازگشت به کتابخانه
+    </a>
+</div>
+
+<div class="hero">
+    <span class="hero-chinese">孫子兵法</span>
+    <div class="hero-badge">تحلیل کامل کتاب</div>
+    <h1>هنر<span>جنگ</span></h1>
+    <p class="hero-sub">سون تزو — ۲۵۰۰ سال پیش نوشته شد، امروز زندگی می‌کند</p>
+    <div class="hero-divider">
+        <div class="hdl"></div>
+        <div class="hdc"></div>
+        <div class="hdl"></div>
+    </div>
+    <div class="hero-quote">
+        «بهترین جنگجو کسی است که بدون جنگیدن پیروز می‌شود.»
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- مقدمه -->
+    <section class="chapter-section" data-cn="序">
+        <div class="chapter-header">
+            <span class="chapter-tag">مقدمه</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">این کتاب درباره چیست؟</h2>
+                <div class="chapter-title-en">Introduction</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>سون تزو یک ژنرال چینی بود که ۲۵۰۰ سال پیش این کتاب را نوشت. اما چرا امروز CEO های بزرگ، سیاستمداران، ورزشکاران حرفه‌ای و حتی روانشناسان آن را می‌خوانند؟</p>
+            <p>چون سون تزو اصلاً فقط درباره جنگ ارتشی حرف نمی‌زند. او درباره هر نوع رقابت، هر نوع تعارض و هر نوع هدفی که برای رسیدن به آن باید با موانع روبرو شوی صحبت می‌کند. جنگ در این کتاب استعاره‌ای است از هر چالشی که در زندگی داری؛ از رقابت شغلی گرفته تا روابط شخصی، از مذاکره تجاری تا غلبه بر خودت.</p>
+        </div>
+    </section>
+
+    <!-- فصل ۱ -->
+    <section class="chapter-section" data-cn="一">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۱</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">برنامه‌ریزی</h2>
+                <div class="chapter-title-en">Laying Plans</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>سون تزو می‌گوید جنگ را قبل از شروع، روی زمین می‌بری یا می‌بازی. پنج عامل تعیین‌کننده هستند:</p>
+
+            <ul class="factor-list">
+                <li class="factor-item">
+                    <div class="factor-num">道</div>
+                    <div class="factor-body">
+                        <div class="factor-name">۱ — راه (Tao)</div>
+                        <div class="factor-desc">آیا هدفت با ارزش‌هایت همخوانی دارد؟ آیا مردمت با تو هستند؟ ارتشی که باور ندارد برای چه می‌جنگد، قبل از شروع جنگ شکست خورده. در زندگی امروز: اگر شغلت با ارزش‌هایت در تضاد است، هر چقدر هم سخت کار کنی، انرژیت تحلیل می‌رود. قبل از شروع هر پروژه بزرگ بپرس: واقعاً برای چه؟</div>
+                    </div>
+                </li>
+                <li class="factor-item">
+                    <div class="factor-num">天</div>
+                    <div class="factor-body">
+                        <div class="factor-name">۲ — آسمان (Heaven)</div>
+                        <div class="factor-desc">زمان‌بندی. فصل، روز، شب. آیا موقعیت برای اقدام مناسب است؟ در زندگی امروز: بازار کجاست؟ فرصت چه زمانی پیش می‌آید؟ آدم درست را چه وقت باید ببینی؟ زمان‌بندی اغلب مهم‌تر از توانایی است.</div>
+                    </div>
+                </li>
+                <li class="factor-item">
+                    <div class="factor-num">地</div>
+                    <div class="factor-body">
+                        <div class="factor-name">۳ — زمین (Earth)</div>
+                        <div class="factor-desc">میدان نبرد را بشناس. فاصله، خطر، زمین باز یا محدود. در زندگی امروز: صنعتت را بشناس. محیط کارت را بشناس. قوانین نانوشته هر محیطی را بدان.</div>
+                    </div>
+                </li>
+                <li class="factor-item">
+                    <div class="factor-num">將</div>
+                    <div class="factor-body">
+                        <div class="factor-name">۴ — فرمانده (Commander)</div>
+                        <div class="factor-desc">خرد، صداقت، خیرخواهی، شجاعت، انضباط. در زندگی امروز: تو فرمانده زندگی خودتی. چقدر این پنج صفت را داری؟</div>
+                    </div>
+                </li>
+                <li class="factor-item">
+                    <div class="factor-num">法</div>
+                    <div class="factor-body">
+                        <div class="factor-name">۵ — روش (Method)</div>
+                        <div class="factor-desc">سازماندهی، هماهنگی، تدارکات. در زندگی امروز: داری با چه سیستمی کار می‌کنی؟ چطور منابعت را مدیریت می‌کنی؟</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- فصل ۲ -->
+    <section class="chapter-section" data-cn="二">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۲</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">هزینه جنگ</h2>
+                <div class="chapter-title-en">Waging War</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>سون تزو می‌گوید هیچ کشوری از جنگ طولانی سود نبرده. هر روزی که جنگ ادامه پیدا کند، هزینه‌اش بیشتر از دیروز است.</p>
+            <div class="gold-quote">«هنرمند جنگ، دشمن را مغلوب می‌کند بدون اینکه بجنگد.»</div>
+            <div class="strategy-box">
+                <span class="strategy-box-label">در زندگی امروز</span>
+                <p>وقتی با یک نفر وارد جنگ قدرت طولانی می‌شوی، حتی اگر بری، چیزی از دستت رفته. بهترین پیروزی آن است که دشمن یا رقیبت بدون جنگ تسلیم شود یا مسیرش را عوض کند. مذاکره، هوش هیجانی، و استراتژی بهتر از خستگی متقابل هستند.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۳ -->
+    <section class="chapter-section" data-cn="三">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۳</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">استراتژی حمله</h2>
+                <div class="chapter-title-en">Attack by Stratagem</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>اینجا مشهورترین جمله کتاب است:</p>
+            <div class="gold-quote">«دشمنت را بشناس و خودت را بشناس؛ در صد نبرد هرگز در خطر نخواهی بود. دشمنت را نشناسی اما خودت را بشناسی؛ یک بار می‌بری یک بار می‌بازی. نه دشمنت را بشناسی نه خودت را؛ در هر نبردی خطر می‌کنی.»</div>
+            <div class="strategy-box">
+                <span class="strategy-box-label">شناخت دشمن در زندگی امروز</span>
+                <p>در رقابت شغلی یعنی بدانی رقیبت چه نقاط قوت و ضعفی دارد. در مذاکره یعنی بدانی طرف مقابل چه می‌خواهد و از چه می‌ترسد. در رابطه یعنی طرف مقابل را واقع‌بینانه ببینی نه آنطور که دوست داری ببینی.</p>
+            </div>
+            <div class="strategy-box">
+                <span class="strategy-box-label">شناخت خود در زندگی امروز</span>
+                <p>این سخت‌تر است. اکثر شکست‌ها نه به خاطر دشمن قوی، بلکه به خاطر نشناختن خودمان است. نقاط کور، ترس‌های پنهان، توهم توانایی یا توهم ناتوانی — اینها ما را شکست می‌دهند نه دشمن.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۴ -->
+    <section class="chapter-section" data-cn="四">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۴</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">تاکتیک</h2>
+                <div class="chapter-title-en">Tactical Dispositions</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>سون تزو می‌گوید: «پیروز شدن ممکن است، اما پیروزی در دست ما نیست؛ شکست‌ناپذیر شدن در دست ماست.»</p>
+            <div class="gold-quote">اول خودت را شکست‌ناپذیر کن، بعد منتظر ضعف دشمن باش.</div>
+            <div class="strategy-box">
+                <span class="strategy-box-label">در زندگی امروز</span>
+                <p>قبل از اینکه به دنبال فرصت باشی، نقاط ضعف خودت را ببند. قبل از اینکه بخواهی رقیب را شکست دهی، از پایه خودت مطمئن شو. کسی که از موضع قدرت وارد مذاکره می‌شود نتیجه بهتری می‌گیرد.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۵ -->
+    <section class="chapter-section" data-cn="五">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۵</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">انرژی</h2>
+                <div class="chapter-title-en">Energy</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>سون تزو از دو نوع نیرو حرف می‌زند:</p>
+            <div class="strategy-box">
+                <span class="strategy-box-label">Cheng — نیروی مستقیم</span>
+                <p>نیروی مستقیم و پیش‌بینی‌پذیر. همه می‌توانند سخت کار کنند. همه می‌توانند بیشتر تلاش کنند. این نیروی مستقیم است.</p>
+            </div>
+            <div class="strategy-box">
+                <span class="strategy-box-label">Chi — نیروی غیرمستقیم</span>
+                <p>نیروی غیرمستقیم، غافلگیرکننده و خلاقانه. آنچه برنده را از بازنده جدا می‌کند اغلب یک حرکت غیرمنتظره، یک زاویه دید جدید، یک راه‌حل خلاقانه است. استیو جابز با محصول بهتر برنده نشد؛ با تجربه کاربری متفاوت برنده شد.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۶ -->
+    <section class="chapter-section" data-cn="六">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۶</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">نقاط قوت و ضعف</h2>
+                <div class="chapter-title-en">Weak Points and Strong</div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="gold-quote">«هر کسی که اول به میدان نبرد رسید و منتظر دشمن ماند، آسوده‌خاطر است. هر کسی که دیر رسید و مجبور به عجله شد، خسته است.»</div>
+            <div class="strategy-box">
+                <span class="strategy-box-label">در زندگی امروز</span>
+                <p>در کسب‌وکار یعنی به جای رقابت مستقیم با غول‌های بزرگ، جایی را پیدا کن که آنها نیستند. در مذاکره یعنی سراغ نقطه‌ای برو که طرف مقابل ضعیف است. در زندگی شخصی یعنی انرژیت را آنجا بگذار که بیشترین تأثیر را دارد، نه آنجا که همه هستند.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۷ -->
+    <section class="chapter-section" data-cn="七">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۷</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">مانور</h2>
+                <div class="chapter-title-en">Maneuvering</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>سون تزو می‌گوید هنر جنگ یعنی تبدیل کردن مسیر کج به مسیر راست. یعنی از طریق دور زدن، سریع‌تر رسیدن.</p>
+            <div class="strategy-box">
+                <span class="strategy-box-label">در زندگی امروز</span>
+                <p>گاهی مستقیم گفتن حرفت بدترین راه است. گاهی برای رسیدن به هدف باید ابتدا به چیز دیگری بپردازی. یک مدیر خوب می‌داند چطور ایده‌اش را طوری مطرح کند که بقیه فکر کنند خودشان به آن رسیده‌اند.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۸ -->
+    <section class="chapter-section" data-cn="八">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۸</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">متغیرهای تاکتیکی</h2>
+                <div class="chapter-title-en">Variation of Tactics</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>«هر فرمانده‌ای که پنج مزیت را بداند، می‌جنگد. هر کسی که نداند، نمی‌جنگد.»</p>
+            <div class="strategy-box">
+                <span class="strategy-box-label">در زندگی امروز</span>
+                <p>کسی که فقط یک مهارت دارد در دنیای امروز آسیب‌پذیر است. کسی که فقط یک استراتژی بلد است، وقتی آن کار نکند گیر می‌ماند. بهترین فرمانده‌ها می‌توانند وسط میدان برنامه را عوض کنند.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۹ -->
+    <section class="chapter-section" data-cn="九">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۰۹</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">ارتش در حرکت</h2>
+                <div class="chapter-title-en">The Army on the March</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>سون تزو می‌گوید فرمانده باید از جنگل، آب، باتلاق و زمین هموار چطور عبور کند بداند. هر محیطی قوانین خودش را دارد.</p>
+            <div class="strategy-box">
+                <span class="strategy-box-label">در زندگی امروز</span>
+                <p>هر محیط کاری، هر رابطه، هر صنعتی فرهنگ و قوانین نانوشته خودش را دارد. کسی که وارد یک محیط جدید می‌شود و انتظار دارد همه چیز مثل جای قبلی باشد، اشتباه می‌کند. اول بخوان، بعد عمل کن.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۱۰ -->
+    <section class="chapter-section" data-cn="十">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۱۰</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">انواع زمین</h2>
+                <div class="chapter-title-en">Terrain</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>سون تزو شش نوع زمین را توصیف می‌کند: زمین دسترس‌پذیر، زمین محبوس‌کننده، زمین مساوی، زمین باریک، زمین صعب‌العبور، و زمین دور.</p>
+            <div class="strategy-box">
+                <span class="strategy-box-label">در زندگی امروز</span>
+                <p>قبل از هر تصمیم بزرگ بپرس: من الان کجا ایستاده‌ام؟ موقعیتم قوی است یا ضعیف؟ آیا راه برگشت دارم؟ آیا در تله افتاده‌ام یا دست بالا دارم؟ خودآگاهی از موقعیت، نیمی از استراتژی است.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۱۱ -->
+    <section class="chapter-section" data-cn="十一">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۱۱</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">نه نوع زمین</h2>
+                <div class="chapter-title-en">The Nine Situations</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>یکی از جالب‌ترین بخش‌های کتاب اینجاست. سون تزو می‌گوید وقتی ارتشت را به جایی ببری که راه فرار نداشته باشند، بهترین می‌جنگند.</p>
+            <div class="gold-quote">«سربازان را به جایی ببر که راه مرگ داشته باشند تا زنده بمانند.»</div>
+            <div class="strategy-box">
+                <span class="strategy-box-label">در زندگی امروز</span>
+                <p>گاهی بریج‌ها را باید پشت سرت خراب کنی. کسی که می‌تواند هر لحظه عقب‌نشینی کند، کمتر تلاش می‌کند. وقتی استعفا دادی و پشتت خالی شد، مغزت خلاق‌تر می‌شود. وقتی قمار همه چیزت را کردی، تمام ظرفیتت فعال می‌شود.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۱۲ -->
+    <section class="chapter-section" data-cn="十二">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۱۲</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">حمله با آتش</h2>
+                <div class="chapter-title-en">The Attack by Fire</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>سون تزو می‌گوید آتش ابزار قدرتمندی است اما کنترلش سخت است. باید بدانی کِی و کجا از آن استفاده کنی.</p>
+            <div class="strategy-box">
+                <span class="strategy-box-label">در زندگی امروز</span>
+                <p>گاهی پیش می‌آید که می‌توانی با یک حرکت تخریبگرانه دشمنت را نابود کنی. اما سون تزو هشدار می‌دهد: آیا بعد از تخریب چه چیزی می‌سازی؟ خشم، افشاگری، یا هر حمله‌ای که فقط نابود می‌کند بدون اینکه چیزی بسازد، اغلب به خود تو برمی‌گردد.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۱۳ -->
+    <section class="chapter-section" data-cn="十三">
+        <div class="chapter-header">
+            <span class="chapter-tag">فصل ۱۳</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">استفاده از جاسوسان</h2>
+                <div class="chapter-title-en">The Use of Spies</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>سون تزو می‌گوید هیچ چیز گران‌تر از جنگ نیست و هیچ چیز ارزان‌تر از اطلاعات. هر فرمانده‌ای که بر دشمنش پیروز می‌شود، از قبل او را می‌شناخته.</p>
+            <div class="strategy-box">
+                <span class="strategy-box-label">انواع جاسوس از نظر سون تزو</span>
+                <p>جاسوس محلی که از مردم همان منطقه است؛ جاسوس داخلی که از مقامات دشمن است؛ جاسوس برگشتی که جاسوسان دشمن را می‌خری؛ جاسوس مرگ که اطلاعات غلط به دشمن می‌دهد؛ و جاسوس زنده که برمی‌گردد و گزارش می‌دهد.</p>
+            </div>
+            <div class="strategy-box">
+                <span class="strategy-box-label">در زندگی امروز</span>
+                <p>قبل از هر مذاکره مهم، تحقیق کن. قبل از هر شراکت، بررسی کن. قبل از هر تصمیم بزرگ، اطلاعات جمع کن. کسی که بدون اطلاعات تصمیم می‌گیرد، شانس را جایگزین استراتژی کرده.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- جمع‌بندی -->
+    <section class="chapter-section" data-cn="終">
+        <div class="chapter-header">
+            <span class="chapter-tag">جمع‌بندی</span>
+            <div class="chapter-title-wrap">
+                <h2 class="chapter-title">پیام اصلی سون تزو</h2>
+                <div class="chapter-title-en">The Final Message</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>سون تزو در کل کتاب یک حرف می‌زند: بهترین جنگجو کسی است که بدون جنگیدن پیروز می‌شود.</p>
+            <p>این یعنی: آنقدر خودت را بشناس، آنقدر موقعیت را بشناس، آنقدر دشمن یا رقیبت را بشناس که وقتی اقدام می‌کنی، نتیجه از قبل مشخص باشد.</p>
+            <div class="gold-quote">آدمی که آنقدر آماده است، آنقدر اطلاعات دارد و آنقدر خودش را می‌شناسد که وقتی فرصت پیش می‌آید، نه از سر هیجان بلکه از سر آمادگی عمل می‌کند.</div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <span class="footer-chinese">知己知彼</span>
+    این خلاصه با هدف ارتقای آگاهی و درک عمیق‌تر مفاهیم کتاب تهیه شده است.
+    <div class="tagline">«خودت را بشناس و دشمنت را بشناس — پیروزی از آن توست.»</div>
+</footer>
+
+</body>
+</html>
