@@ -1,122 +1,185 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<style>
-    @font-face {
-        font-family: 'Casablanca';
-        src: url('https://cdn.fontcdn.ir/Font/Persian/Casablanca/Casablanca.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-    }
+    <meta charset="UTF-8">
+    <title>کتابخانه من</title>
+    <style>
+        @font-face {
+            font-family: 'Casablanca';
+            src: url('https://cdn.fontcdn.ir/Font/Persian/Casablanca/Casablanca.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
 
-    @import url('https://fonts.googleapis.com/css2?family=IranNastaliq&display=swap');
-</style>
+        @import url('https://fonts.googleapis.com/css2?family=IranNastaliq&display=swap');
+
+        /* استایل‌های پایه تم سلطنتی و مینیمال */
+        body {
+            font-family: 'Casablanca', 'Tahoma', sans-serif;
+            background-color: #f7f5f0; /* سفید استخوانی/مرمری ملایم */
+            color: #1a1a1a;
+            line-height: 1.8;
+            margin: 0;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease;
+        }
+
+        #main-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            transition: filter 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* بخش سربرگ و تیترها */
+        h1 {
+            font-family: 'IranNastaliq', serif !important;
+            color: #111111;
+            font-size: 4.5rem;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: normal;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        p.intro {
+            font-family: 'Casablanca', sans-serif;
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 60px;
+            color: #555555;
+            font-size: 1.2rem;
+            border-bottom: 1px dashed #d1c7bd;
+            padding-bottom: 30px;
+        }
+
+        /* بخش‌بندی کتابخانه */
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section h2 {
+            font-family: 'IranNastaliq', serif !important;
+            color: #1a1a1a;
+            font-size: 3rem;
+            border-right: 4px solid #c5a880; /* خط طلایی مات ارستوکراتیک */
+            padding-right: 20px;
+            margin-bottom: 40px;
+            font-weight: normal;
+        }
+
+        /* چیدمان کتاب‌ها */
+        .books {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 35px;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .book-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* کارت کتاب سه‌بعدی و لوکس */
+        .book-card {
+            background: #ffffff;
+            border: 1px solid #e9e6df;
+            border-radius: 4px; /* لبه‌های تیزتر و هندسی کلاسیک */
+            padding: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            position: relative;
+            background-image: linear-gradient(180deg, #ffffff 0%, #fdfcfb 100%);
+        }
+
+        .book-card:hover {
+            transform: translateY(-12px);
+            border-color: #c5a880; /* فوکوس طلایی */
+            box-shadow: 0 20px 35px rgba(197, 168, 128, 0.15), 0 15px 30px rgba(0, 0, 0, 0.08);
+            z-index: 10;
+        }
+
+        /* تصویر جلد کتاب */
+        .book-card img {
+            width: 100%;
+            height: 270px;
+            object-fit: cover;
+            border-radius: 2px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.4s ease;
+        }
+
+        .book-card:hover img {
+            transform: scale(1.02);
+        }
+
+        /* عنوان و نویسنده */
+        .book-title {
+            font-family: 'Casablanca', sans-serif;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 15px;
+            color: #111111;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.4;
+        }
+
+        .book-author {
+            font-family: 'Casablanca', sans-serif;
+            font-size: 13px;
+            color: #777777;
+            margin-top: 5px;
+            letter-spacing: 0.3px;
+        }
+
+        /* کتیبه خلاصه کتاب (لوح اطلاعات متحرک) */
+        #summary-box {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(40px);
+            width: 85%;
+            max-width: 650px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            border-top: 4px solid #c5a880;
+            padding: 25px 35px;
+            border-radius: 4px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-align: justify;
+            font-family: 'Casablanca', sans-serif;
+            font-size: 1.15rem;
+            color: #222222;
+            line-height: 1.9;
+        }
+
+        #summary-box.active {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* افکت محوشدگی اشرافی پس‌زمینه */
+        .blur-effect {
+            filter: blur(4px) grayscale(15%);
+            opacity: 0.6;
+        }
+    </style>
 </head>
-<meta charset="UTF-8">
-<title>کتابخانه من</title>
-
-<style>
-body {
-    font-family: 'Casablanca', 'Tahoma', sans-serif;
-    background-color: #0a0a0a;
-    color: #000000;
-    line-height: 1.6;
-}
-
-h1, h2, h3, .logo {
-    font-family: 'IranNastaliq', serif !important;
-    color: #000000;
-    font-size: 3.0rem;
-    line-height: 2.5;
-    text-align: right;
-    font-weight: normal;
-}
-
-.book-card p, .btn {
-    font-family: 'Casablanca', sans-serif;
-    font-size: 1.1rem;
-}
-
-body {
-    font-family: Tahoma, sans-serif;
-    background: #f4f4f4;
-    margin: 0;
-    padding: 30px;
-    overflow-x: hidden;
-}
-
-#main-wrapper {
-    transition: filter 0.4s ease;
-}
-
-h1, p.intro { text-align: center; }
-p.intro { max-width: 700px; margin: 0 auto 40px; color: #444; }
-
-.section { margin-bottom: 50px; }
-.section h2 { border-right: 5px solid #e67e22; padding-right: 15px; margin-bottom: 25px; }
-.books { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-
-.book-link { text-decoration: none; color: inherit; display: block; }
-
-.book-card {
-    width: 180px;
-    background: #fff;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-}
-
-.book-card:hover {
-    transform: scale(1.1);
-    z-index: 100;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-.book-card img {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.book-title { margin-top: 10px; font-weight: bold; font-size: 14px; height: 40px; display: flex; align-items: center; justify-content: center; }
-.book-author { font-size: 12px; color: #666; }
-
-#summary-box {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    width: 80%;
-    max-width: 600px;
-    background: rgba(255, 255, 255, 0.98);
-    border-right: 6px solid #e67e22;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 -5px 30px rgba(0,0,0,0.3);
-    z-index: 1000;
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    text-align: justify;
-    line-height: 1.8;
-    pointer-events: none;
-}
-
-#summary-box.active {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-.blur-effect {
-    filter: blur(8px) grayscale(30%);
-}
-</style>
-
 <body>
 
 <div id="main-wrapper">
@@ -128,101 +191,111 @@ p.intro { max-width: 700px; margin: 0 auto 40px; color: #444; }
     <div class="section">
         <h2>📚 کتابخانه من</h2>
         <div class="books">
+            
             <a href="book1.html" class="book-link">
                 <div class="book-card" data-index="0">
-                    <img src="1.jpg">
+                    <img src="1.jpg" alt="۱۲ قانون زندگی">
                     <div class="book-title">۱۲ قانون زندگی</div>
                     <div class="book-author">جردن بی. پیترسون</div>
                 </div>
             </a>
-            <div class="book-card" data-index="1">
-  <a href="book2.html" class="book-link">
 
-                <img src="2.jpg">
-                <div class="book-title">فراتر از نظم</div>
-                <div class="book-author">جردن پیترسون</div>
-                </a>
-            </div>
-            <div class="book-card" data-index="2">
- <a href="book3.html" class="book-link">
-                <img src="3.jpg">
-                <div class="book-title">تخت خوابت را مرتب کن</div>
-                <div class="book-author">ژنرال مک‌ریون</div>
-</a>
-            </div>
-        
+            <a href="book2.html" class="book-link">
+                <div class="book-card" data-index="1">
+                    <img src="2.jpg" alt="فراتر از نظم">
+                    <div class="book-title">فراتر از نظم</div>
+                    <div class="book-author">جردن پیترسون</div>
+                </div>
+            </a>
 
-<div class="book-card" data-index="3">
- <a href="book4.html" class="book-link">
-                <img src="4.jpg">
-                <div class="book-title">افسانه کاریزما</div>
-                <div class="book-author">اولیویا فاکس کابان</div>
-</a>
-            </div>
-            <div class="book-card" data-index="4">
-                 <a href="book5.html" class="book-link">
-                <img src="5.jpg">
-                <div class="book-title">بیندیشید و ثروتمند شوید</div>
-                <div class="book-author">ناپلئون هیل</div>
-                 </a>
-            </div>
-            <div class="book-card" data-index="5">
-                 <a href="book6.html" class="book-link">
-                <img src="6.jpg">
-                <div class="book-title">۴۸ قانون قدرت</div>
-                <div class="book-author">رابرت گرین</div>
-                 </a>
-            </div>
-            <div class="book-card" data-index="6">
- <a href="book7.html" class="book-link">
-                <img src="7.jpg">
-                <div class="book-title">شهریار</div>
-                <div class="book-author">ماکیاولی</div>
- </a>
-            </div>
-            <div class="book-card" data-index="7">
-                <a href="book8.html" class="book-link">
-                <img src="8.jpg">
-                <div class="book-title">انسان در جستجوی هویت خویشتن</div>
-                <div class="book-author">کارل یونگ</div>
-                </a>
-            </div>
-            <div class="book-card" data-index="8">
-                <a href="book9.html" class="book-link">
-                <img src="9.jpg">
-                <div class="book-title">روانشناسی تاریک</div>
-                <div class="book-author">ویلیام کوپر</div>
-                </a>
-            </div>
-            <div class="book-card" data-index="9">
-                <a href="book10.html" class="book-link">
-                <img src="10.jpg">
-                <div class="book-title">تفسیر خواب</div>
-                <div class="book-author">زیگموند فروید</div>
-                </a>
-            </div>
-            <div class="book-card" data-index="10">
-                <a href="book11.html" class="book-link">
-                <img src="11.jpg">
-                <div class="book-title">هنر جنگ</div>
-                <div class="book-author">سون تزو</div>
-                </a>
-            </div>
-            <div class="book-card" data-index="11">
-                <a href="book12.html" class="book-link">
-                <img src="12.jpg">
-                <div class="book-title">شاه لیر</div>
-                <div class="book-author">شکسپیر</div>
-                </a>
-            
-            </div>
-            <div class="book-card" data-index="12">
-                <a href="book13.html" class="book-link">
-                <img src="13.jpg">
-                <div class="book-title">هنر بله گرفتن</div>
-                <div class="book-author">فیشر و یوری</div>
-                </a>
-            </div>
+            <a href="book3.html" class="book-link">
+                <div class="book-card" data-index="2">
+                    <img src="3.jpg" alt="تخت خوابت را مرتب کن">
+                    <div class="book-title">تخت خوابت را مرتب کن</div>
+                    <div class="book-author">ژنرال مک‌ریون</div>
+                </div>
+            </a>
+
+            <a href="book4.html" class="book-link">
+                <div class="book-card" data-index="3">
+                    <img src="4.jpg" alt="افسانه کاریزما">
+                    <div class="book-title">افسانه کاریزما</div>
+                    <div class="book-author">اولیویا فاکس کابان</div>
+                </div>
+            </a>
+
+            <a href="book5.html" class="book-link">
+                <div class="book-card" data-index="4">
+                    <img src="5.jpg" alt="بیندیشید و ثروتمند شوید">
+                    <div class="book-title">بیندیشید و ثروتمند شوید</div>
+                    <div class="book-author">ناپلئون هیل</div>
+                </div>
+            </a>
+
+            <a href="book6.html" class="book-link">
+                <div class="book-card" data-index="5">
+                    <img src="6.jpg" alt="۴۸ قانون قدرت">
+                    <div class="book-title">۴۸ قانون قدرت</div>
+                    <div class="book-author">رابرت گرین</div>
+                </div>
+            </a>
+
+            <a href="book7.html" class="book-link">
+                <div class="book-card" data-index="6">
+                    <img src="7.jpg" alt="شهریار">
+                    <div class="book-title">شهریار</div>
+                    <div class="book-author">ماکیاولی</div>
+                </div>
+            </a>
+
+            <a href="book8.html" class="book-link">
+                <div class="book-card" data-index="7">
+                    <img src="8.jpg" alt="انسان در جستجوی هویت خویشتن">
+                    <div class="book-title">انسان در جستجوی هویت خویشتن</div>
+                    <div class="book-author">کارل یونگ</div>
+                </div>
+            </a>
+
+            <a href="book9.html" class="book-link">
+                <div class="book-card" data-index="8">
+                    <img src="9.jpg" alt="روانشناسی تاریک">
+                    <div class="book-title">روانشناسی تاریک</div>
+                    <div class="book-author">ویلیام کوپر</div>
+                </div>
+            </a>
+
+            <a href="book10.html" class="book-link">
+                <div class="book-card" data-index="9">
+                    <img src="10.jpg" alt="تفسیر خواب">
+                    <div class="book-title">تفسیر خواب</div>
+                    <div class="book-author">زیگموند فروید</div>
+                </div>
+            </a>
+
+            <a href="book11.html" class="book-link">
+                <div class="book-card" data-index="10">
+                    <img src="11.jpg" alt="هنر جنگ">
+                    <div class="book-title">هنر جنگ</div>
+                    <div class="book-author">سون تزو</div>
+                </div>
+            </a>
+
+            <a href="book12.html" class="book-link">
+                <div class="book-card" data-index="11">
+                    <img src="12.jpg" alt="شاه لیر">
+                    <div class="book-title">شاه لیر</div>
+                    <div class="book-author">شکسپیر</div>
+                </div>
+            </a>
+
+            <a href="book13.html" class="book-link">
+                <div class="book-card" data-index="12">
+                    <img src="13.jpg" alt="هنر بله گرفتن">
+                    <div class="book-title">هنر بله گرفتن</div>
+                    <div class="book-author">فیشر و یوری</div>
+                </div>
+            </a>
+
         </div>
     </div>
 </div>
@@ -258,8 +331,7 @@ p.intro { max-width: 700px; margin: 0 auto 40px; color: #444; }
             wrapper.classList.add('blur-effect');
         });
 
-
-card.addEventListener('mouseleave', () => {
+        card.addEventListener('mouseleave', () => {
             summaryBox.classList.remove('active');
             wrapper.classList.remove('blur-effect');
         });
