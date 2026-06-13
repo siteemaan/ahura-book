@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روان‌شناسی تاریک — ویلیام کوپر</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:           #120e0c;
+            --bg-card:      #1c1512;
+            --bg-mid:       #221a16;
+            --accent:       #b5472b;
+            --accent-dim:   rgba(181, 71, 43, 0.12);
+            --accent-light: #d9744f;
+            --warn:         #d4a017;
+            --warn-dim:     rgba(212, 160, 23, 0.10);
+            --safe:         #5a9b6e;
+            --safe-dim:     rgba(90, 155, 110, 0.10);
+            --text:         #ede5e0;
+            --text-muted:   #948078;
+            --border:       #2c211c;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.95;
+            overflow-x: hidden;
+        }
+
+        /* ─── TOPBAR ─── */
+        .topbar {
+            padding: 16px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+        .back-btn {
+            text-decoration: none;
+            color: var(--accent-light);
+            font-size: 0.88rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: opacity 0.2s;
+        }
+        .back-btn:hover { opacity: 0.65; }
+        .back-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 80px 24px 60px;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+        /* الگوی هشدار ظریف در پس‌زمینه */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                135deg,
+                transparent,
+                transparent 60px,
+                rgba(212,160,23,0.025) 60px,
+                rgba(212,160,23,0.025) 61px
+            );
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            color: var(--warn);
+            text-transform: uppercase;
+            border: 1px solid rgba(212,160,23,0.35);
+            border-radius: 4px;
+            padding: 5px 14px;
+            margin-bottom: 28px;
+            background: var(--warn-dim);
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            font-size: 2.85rem;
+            font-weight: 900;
+            line-height: 1.35;
+            letter-spacing: -1.5px;
+            margin-bottom: 14px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent-light);
+        }
+
+        .hero-sub {
+            position: relative;
+            z-index: 1;
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            font-weight: 300;
+            margin-bottom: 36px;
+        }
+
+        .hero-quote {
+            position: relative;
+            z-index: 1;
+            max-width: 580px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            font-weight: 300;
+            line-height: 1.9;
+            border-right: 3px solid var(--warn);
+            padding-right: 18px;
+            text-align: right;
+        }
+
+        /* ─── CONTAINER ─── */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 75px 28px 60px;
+        }
+
+        .part-header {
+            margin-bottom: 36px;
+        }
+        .part-header .part-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--warn);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .part-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .law-section {
+            margin-bottom: 75px;
+            padding-bottom: 75px;
+            border-bottom: 1px solid var(--border);
+        }
+        .law-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .content p {
+            color: #ccc1ba;
+            font-size: 1.0rem;
+            font-weight: 300;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        .content p:last-child { margin-bottom: 0; }
+
+        /* ─── باکس هشدار عمومی ─── */
+        .alert-box {
+            position: relative;
+            background: var(--bg-mid);
+            border: 1px solid var(--border);
+            border-right: 4px solid var(--warn);
+            border-radius: 8px;
+            padding: 26px 28px;
+            margin: 26px 0;
+        }
+        .alert-box-label {
+            position: absolute;
+            top: -11px;
+            right: 20px;
+            font-size: 0.65rem;
+            font-weight: 900;
+            letter-spacing: 2.5px;
+            color: var(--warn);
+            background: var(--bg-mid);
+            padding: 0 8px;
+            text-transform: uppercase;
+        }
+        .alert-box p {
+            color: var(--text-muted);
+            font-size: 0.96rem;
+            line-height: 1.9;
+            margin-bottom: 0;
+        }
+
+        /* ─── کارت‌های مثلث تاریک ─── */
+        .triad-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 28px;
+        }
+        .triad-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-right: 4px solid var(--accent);
+            border-radius: 10px;
+            padding: 22px 24px;
+        }
+        .triad-title {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 10px;
+        }
+        .triad-card p {
+            color: #b9aea6;
+            font-size: 0.94rem;
+            font-weight: 300;
+            line-height: 1.85;
+            margin-bottom: 0;
+        }
+
+        /* ─── کارت‌های تکنیک (شبکه‌ای) ─── */
+        .technique-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 28px;
+        }
+        .technique-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 22px;
+            transition: border-color 0.25s ease;
+        }
+        .technique-card:hover {
+            border-color: rgba(212,160,23,0.35);
+        }
+        .technique-head {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .technique-icon {
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--accent-dim);
+            color: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+        }
+        .technique-title {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .technique-title-en {
+            font-size: 0.76rem;
+            color: var(--warn);
+            font-weight: 400;
+            opacity: 0.8;
+            direction: ltr;
+            unicode-bidi: embed;
+        }
+        .technique-card p {
+            color: #b9aea6;
+            font-size: 0.94rem;
+            font-weight: 300;
+            line-height: 1.85;
+            margin-bottom: 0;
+            padding-right: 40px;
+        }
+
+        /* ─── باکس دفاع/راه‌حل (سبز) ─── */
+        .defense-box {
+            background: var(--safe-dim);
+            border: 1px solid rgba(90,155,110,0.25);
+            border-right: 4px solid var(--safe);
+            border-radius: 10px;
+            padding: 26px 28px;
+            margin-top: 18px;
+        }
+        .defense-box-label {
+            font-size: 0.7rem;
+            font-weight: 900;
+            letter-spacing: 2.5px;
+            color: var(--safe);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .defense-box p {
+            color: #c4cdc6;
+            font-size: 0.96rem;
+            line-height: 1.9;
+            margin-bottom: 0;
+        }
+
+        /* ─── checklist دفاعی ─── */
+        .defense-list {
+            margin-top: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .defense-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 18px;
+        }
+        .defense-icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: var(--safe-dim);
+            color: var(--safe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+        .defense-text {
+            color: #ccc1ba;
+            font-size: 0.96rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* ─── جمع‌بندی نهایی ─── */
+        .final-box {
+            background: linear-gradient(135deg, var(--bg-mid), var(--bg-card));
+            border: 1px solid rgba(212,160,23,0.2);
+            border-radius: 12px;
+            padding: 36px 32px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .final-box .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--warn);
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+        .final-box p {
+            color: #d8cfc8;
+            font-size: 1.0rem;
+            font-weight: 300;
+            line-height: 2.05;
+            text-align: justify;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            text-align: center;
+            padding: 55px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.87rem;
+            margin-top: 60px;
+        }
+        footer .tagline {
+            color: var(--warn);
+            font-size: 1.0rem;
+            font-weight: 600;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    <a href="index.html" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        بازگشت به کتابخانه
+    </a>
+</div>
+
+<div class="hero">
+    <div class="hero-badge">شناسایی و دفاع</div>
+    <h1>روان‌شناسی <em>تاریک</em></h1>
+    <p class="hero-sub">اثر ویلیام کوپر — راهنمای شناخت و خنثی‌سازی دستکاری‌های پنهان</p>
+    <p class="hero-quote">این کتاب ابزاری برای دفاع است، نه برای دستکاری دیگران؛ هدف، شناختن ترفندها پیش از آن است که قربانی‌شان شوی.</p>
+</div>
+
+<div class="container">
+
+    <!-- مقدمه -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">مقدمه</span>
+            <h2>چرا این کتاب اهمیت دارد؟</h2>
+        </div>
+        <div class="content">
+            <p>در دنیای امروز، خیلی‌ها با ترفندهای پنهان سعی می‌کنند دیگران را کنترل کنند. این کتاب همان ترفندها را رو می‌کند تا بتوانی آن‌ها را بشناسی و خنثی کنی.</p>
+            <div class="alert-box">
+                <span class="alert-box-label">هدف کتاب</span>
+                <p>برملا کردن روش‌های دستکاری عاطفی، کنترل ذهن، فریب و شستشوی مغزی. پیام اصلی این است: به‌جای اینکه قربانی شوی، با آگاهی بیشتر از خودت و اطرافیانت محافظت کن.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۱ -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۱</span>
+            <h2>معرفی روان‌شناسی تاریک</h2>
+        </div>
+        <div class="content">
+            <p>روان‌شناسی تاریک یعنی مطالعه رفتارهایی که افراد برای نفوذ و کنترل دیگران به کار می‌برند. تفاوت اصلی اینجاست: اقناع معمولی برای منافع مشترک طرفین است، اما دستکاری تاریک فقط به نفع یک طرف و بدون توجه به آسیب طرف مقابل عمل می‌کند.</p>
+            <div class="alert-box">
+                <span class="alert-box-label">نکته کلیدی</span>
+                <p>همه انسان‌ها پتانسیل این رفتارها را دارند، اما مهم این است که این دانش را برای دفاع به‌کار بگیریم، نه برای آسیب زدن به دیگران.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۲: مثلث تاریک -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۲ — مهم‌ترین بخش</span>
+            <h2>مثلث تاریک: سه شخصیت خطرناک</h2>
+        </div>
+        <div class="content">
+            <p>این بخش سه ویژگی شخصیتی را معرفی می‌کند که در افراد خطرناک دیده می‌شود. شناخت این سه ویژگی، اولین قدم برای تشخیص زودهنگام چنین افرادی در روابط و محیط کار است.</p>
+            <div class="triad-grid">
+                <div class="triad-card">
+                    <div class="triad-title">خودشیفتگی (Narcissism)</div>
+                    <p>فرد فقط به خودش فکر می‌کند، دیگران را ابزاری برای رسیدن به اهدافش می‌بیند و دائماً سعی می‌کند خودش را برتر از دیگران نشان دهد.</p>
+                </div>
+                <div class="triad-card">
+                    <div class="triad-title">ماکیاولیسم (Machiavellianism)</div>
+                    <p>فردی حساب‌گر و سرد که بدون احساس گناه دروغ می‌گوید و از هر راهی — حتی فریب — برای رسیدن به هدف خود استفاده می‌کند.</p>
+                </div>
+                <div class="triad-card">
+                    <div class="triad-title">روان‌پریشی (Psychopathy)</div>
+                    <p>فقدان همدلی و عمل تکانشی؛ ممکن است به دیگران آسیب بزند بدون اینکه کوچک‌ترین پشیمانی احساس کند.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۳: تکنیک‌های پایه -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۳</span>
+            <h2>تکنیک‌های اقناع و دستکاری پایه</h2>
+        </div>
+        <div class="content">
+            <p>این فصل ترفندهای روزمره‌ای را معرفی می‌کند که در روابط، محل کار یا حتی تبلیغات دیده می‌شوند. شناخت هرکدام، نخستین قدم برای خلع سلاح کردن آن‌هاست.</p>
+            <div class="technique-grid">
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۱</span>
+                        <span class="technique-title">پا لای در</span>
+                        <span class="technique-title-en">Foot-in-the-Door</span>
+                    </div>
+                    <p>اول یک درخواست خیلی کوچک مطرح می‌شود که راحت قبول می‌کنی؛ سپس درخواست‌های بزرگ‌تر می‌آید. چون یک بار قبول کرده‌ای، احساس تعهد می‌کنی و راحت‌تر تسلیم می‌شوی.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۲</span>
+                        <span class="technique-title">اصل کمبود</span>
+                        <span class="technique-title-en">Scarcity</span>
+                    </div>
+                    <p>«این فرصت فقط تا امروز است» یا «فقط برای تو این کار را می‌کنم». این جملات باعث می‌شوند بدون فکر و با عجله تصمیم بگیری.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۳</span>
+                        <span class="technique-title">بازی نقش قربانی</span>
+                        <span class="technique-title-en">Playing the Victim</span>
+                    </div>
+                    <p>فرد خودش را ضعیف و قربانی نشان می‌دهد تا تو احساس ترحم کنی، کمک کنی یا کوتاه بیایی.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۴</span>
+                        <span class="technique-title">پروجکشن</span>
+                        <span class="technique-title-en">Projection</span>
+                    </div>
+                    <p>اشتباه خودش را به تو نسبت می‌دهد تا تو وارد موضع دفاعی شوی و گیج بمانی.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۵</span>
+                        <span class="technique-title">برچسب‌زنی</span>
+                        <span class="technique-title-en">Labeling</span>
+                    </div>
+                    <p>به تو برچسب «حساس»، «خودخواه» یا «غیرمنطقی» می‌زند تا واکنش‌ها و رفتارهایت را کنترل کند.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۴: دستکاری عاطفی -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۴ — هشدار جدی</span>
+            <h2>دستکاری عاطفی و Gaslighting</h2>
+        </div>
+        <div class="content">
+            <p>این فصل به برخی از مخرب‌ترین تکنیک‌های روابط سمی می‌پردازد — تکنیک‌هایی که می‌توانند اعتمادبه‌نفس و حس واقعیت فرد را به‌مرور از بین ببرند.</p>
+            <div class="technique-grid">
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۱</span>
+                        <span class="technique-title">گس‌لایتینگ</span>
+                        <span class="technique-title-en">Gaslighting</span>
+                    </div>
+                    <p>کم‌کم باعث می‌شود به حافظه و عقل خودت شک کنی؛ مثل «من این حرف را نزدم، تو اشتباه شنیدی» یا «تو همیشه همه‌چیز را اشتباه می‌فهمی». این ترفند اعتمادبه‌نفس را نابود می‌کند و وابستگی ایجاد می‌کند.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۲</span>
+                        <span class="technique-title">بمباران محبت</span>
+                        <span class="technique-title-en">Love Bombing</span>
+                    </div>
+                    <p>ابتدا با محبت زیاد، هدیه و توجه غرق می‌کند تا وابسته شوی؛ سپس ناگهان محبت را قطع می‌کند تا برای برگرداندنش التماس کنی.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۳</span>
+                        <span class="technique-title">سکوت تنبیهی و گیلت‌تریپینگ</span>
+                        <span class="technique-title-en">Silent Treatment & Guilt-Tripping</span>
+                    </div>
+                    <p>با سکوت طولانی تنبیهت می‌کند یا با ایجاد احساس گناه، باعث می‌شود کوتاه بیایی.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۴</span>
+                        <span class="technique-title">انزوا</span>
+                        <span class="technique-title-en">Isolation</span>
+                    </div>
+                    <p>تو را از دوستان و خانواده دور می‌کند تا فقط به او وابسته باشی و کسی برای مشورت یا کمک نداشته باشی.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۵: زبان بدن -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۵</span>
+            <h2>زبان بدن و خواندن افراد</h2>
+        </div>
+        <div class="content">
+            <p>این فصل یاد می‌دهد چطور حرکات دست، چهره، چشم و وضعیت بدن را بخوانی تا متوجه شوی طرف مقابل صادق است یا نه. برای نمونه، تماس چشمی کم، دست به صورت زدن مکرر یا تغییر ناگهانی حالت بدن، می‌تواند نشانه دروغ یا ناراحتی پنهان باشد. این مهارت به شناخت نیت واقعی افراد کمک می‌کند.</p>
+        </div>
+    </section>
+
+    <!-- فصل ۶: NLP و هیپنوتیزم -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۶</span>
+            <h2>NLP، هیپنوتیزم و تکنیک‌های ذهنی</h2>
+        </div>
+        <div class="content">
+            <div class="technique-grid">
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۱</span>
+                        <span class="technique-title">برنامه‌ریزی عصبی-زبانی</span>
+                        <span class="technique-title-en">NLP</span>
+                    </div>
+                    <p>تقلید حرکات و لحن طرف مقابل (mirroring) برای ایجاد حس نزدیکی سریع، یا استفاده از کلمات خاص برای تأثیرگذاری بر ناخودآگاه شنونده.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۲</span>
+                        <span class="technique-title">هیپنوتیزم گفتاری</span>
+                        <span class="technique-title-en">Conversational Hypnosis</span>
+                    </div>
+                    <p>ایجاد حالت آرامش در طرف مقابل و سپس کاشتن یک ایده در ذهن او؛ معمولاً به‌صورت بسیار نرم و در میان مکالمه عادی اتفاق می‌افتد.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۷: شستشوی مغزی -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۷ — تکنیک‌های پیشرفته</span>
+            <h2>شستشوی مغزی و کنترل پیشرفته</h2>
+        </div>
+        <div class="content">
+            <div class="technique-grid">
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۱</span>
+                        <span class="technique-title">شستشوی مغزی</span>
+                        <span class="technique-title-en">Brainwashing</span>
+                    </div>
+                    <p>کنترل کامل اطلاعاتی که فرد دریافت می‌کند، تکرار مداوم یک پیام، ایجاد ترس و انزوا برای تغییر باورهای او. این روش معمولاً در فرقه‌ها یا روابط بسیار آسیب‌زا دیده می‌شود.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۲</span>
+                        <span class="technique-title">خسته‌سازی</span>
+                        <span class="technique-title-en">Fatigue Inducement</span>
+                    </div>
+                    <p>با بحث طولانی یا کم‌خواب نگه داشتن فرد، مقاومت ذهنی او را کاهش می‌دهند تا راحت‌تر پیشنهادها را بپذیرد.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۳</span>
+                        <span class="technique-title">روان‌شناسی معکوس</span>
+                        <span class="technique-title-en">Reverse Psychology</span>
+                    </div>
+                    <p>گفتن عکس چیزی که واقعاً می‌خواهی، به این امید که طرف مقابل برعکس آن عمل کند.</p>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-head">
+                        <span class="technique-icon">۴</span>
+                        <span class="technique-title">اشاره غیرمستقیم</span>
+                        <span class="technique-title-en">Insinuation</span>
+                    </div>
+                    <p>به‌جای گفتن مستقیم یک حرف، اشاره‌ای مبهم می‌دهد تا خودِ شنونده به نتیجه‌گیری مدنظر او برسد.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل پایانی: دفاع -->
+    <section class="law-section">
+        <div class="part-header">
+            <span class="part-tag">فصل پایانی</span>
+            <h2>روابط سمی و راه‌های دفاع</h2>
+        </div>
+        <div class="content">
+            <p>آخرین فصل کتاب، تمرکز را از «شناخت تکنیک‌ها» به «اقدام عملی برای محافظت از خود» تغییر می‌دهد.</p>
+            <div class="defense-list">
+                <div class="defense-item">
+                    <span class="defense-icon">۱</span>
+                    <span class="defense-text">تشخیص زودهنگام افراد سمی، با توجه به الگوهای رفتاری تکرارشونده‌ای که در فصل‌های قبل معرفی شد.</span>
+                </div>
+                <div class="defense-item">
+                    <span class="defense-icon">۲</span>
+                    <span class="defense-text">گذاشتن مرزهای شخصی روشن (Boundaries) و پایبندی به آن‌ها، حتی اگر طرف مقابل واکنش منفی نشان دهد.</span>
+                </div>
+                <div class="defense-item">
+                    <span class="defense-icon">۳</span>
+                    <span class="defense-text">حفظ اعتمادبه‌نفس و اعتماد به حافظه و قضاوت خودت، به‌خصوص در برابر گس‌لایتینگ.</span>
+                </div>
+                <div class="defense-item">
+                    <span class="defense-icon">۴</span>
+                    <span class="defense-text">در صورت لزوم، قطع کامل ارتباط با فردی که الگوهای دستکاری‌گرانه‌اش تکراری و آسیب‌زا شده است.</span>
+                </div>
+            </div>
+            <div class="defense-box">
+                <span class="defense-box-label">پیام پایانی کتاب</span>
+                <p>این اطلاعات ابزاری برای دفاع از خودت است، نه راهنمایی برای دستکاری دیگران. هدف نهایی، تصمیم‌گیری آگاهانه و کمتر فریب خوردن در روابط، کار و زندگی روزمره است.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- جمع‌بندی -->
+    <div class="final-box">
+        <div class="label">جمع‌بندی</div>
+        <p>روان‌شناسی تاریک، نقشه‌ای از ترفندهای پنهانی است که برخی افراد برای کنترل دیگران به کار می‌برند — از درخواست‌های کوچک فریبنده تا گس‌لایتینگ و شستشوی مغزی. شناخت این الگوها به تو این امکان را می‌دهد که در روابط، محل کار و زندگی روزمره، زودتر متوجه دستکاری شوی، مرز بگذاری و تصمیم‌هایت را با آگاهی بیشتری بگیری.</p>
+    </div>
+
+</div>
+
+<footer>
+    این خلاصه با هدف ارتقای آگاهی و درک عمیق‌تر مفاهیم کتاب تهیه شده است.
+    <div class="tagline">«آگاهی، اولین خط دفاع توست.»</div>
+</footer>
+
+</body>
+</html>
