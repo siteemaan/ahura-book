@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هنر بله گرفتن — فیشر و یوری</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:           #0c1214;
+            --bg-card:      #131c1f;
+            --bg-mid:       #182427;
+            --accent:       #4d8a8c;
+            --accent-dim:   rgba(77, 138, 140, 0.12);
+            --accent-light: #7fb8ba;
+            --sage:         #8fae8a;
+            --sage-dim:     rgba(143, 174, 138, 0.10);
+            --text:         #e6ecec;
+            --text-muted:   #82979a;
+            --border:       #1e2c2f;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.95;
+            overflow-x: hidden;
+        }
+
+        /* ─── TOPBAR ─── */
+        .topbar {
+            padding: 16px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+        .back-btn {
+            text-decoration: none;
+            color: var(--accent-light);
+            font-size: 0.88rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: opacity 0.2s;
+        }
+        .back-btn:hover { opacity: 0.65; }
+        .back-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 80px 24px 60px;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+        /* دو دایره هم‌پوشان — نماد توافق/تقاطع منافع */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 420px;
+            height: 220px;
+            transform: translate(-50%, -50%);
+            background:
+                radial-gradient(circle at 35% 50%, rgba(77,138,140,0.07) 0%, transparent 45%),
+                radial-gradient(circle at 65% 50%, rgba(143,174,138,0.07) 0%, transparent 45%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            color: var(--sage);
+            text-transform: uppercase;
+            border: 1px solid rgba(143,174,138,0.3);
+            border-radius: 4px;
+            padding: 5px 14px;
+            margin-bottom: 28px;
+            background: var(--sage-dim);
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            font-size: 2.85rem;
+            font-weight: 900;
+            line-height: 1.35;
+            letter-spacing: -1.5px;
+            margin-bottom: 14px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent-light);
+        }
+
+        .hero-sub {
+            position: relative;
+            z-index: 1;
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            font-weight: 300;
+            margin-bottom: 36px;
+        }
+
+        .hero-quote {
+            position: relative;
+            z-index: 1;
+            max-width: 580px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            font-weight: 300;
+            line-height: 1.9;
+            border-right: 3px solid var(--sage);
+            padding-right: 18px;
+            text-align: right;
+        }
+
+        /* ─── CONTAINER ─── */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 75px 28px 60px;
+        }
+
+        .part-header {
+            margin-bottom: 36px;
+        }
+        .part-header .part-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--sage);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .part-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        .part-header h2 span.en {
+            font-size: 0.85rem;
+            color: var(--accent-light);
+            font-weight: 400;
+            opacity: 0.75;
+            display: block;
+            margin-top: 6px;
+            direction: ltr;
+            unicode-bidi: embed;
+            text-align: right;
+        }
+
+        .law-section {
+            margin-bottom: 75px;
+            padding-bottom: 75px;
+            border-bottom: 1px solid var(--border);
+        }
+        .law-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .content p {
+            color: #c5d2d3;
+            font-size: 1.0rem;
+            font-weight: 300;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        .content p:last-child { margin-bottom: 0; }
+
+        /* ─── باکس مفهوم ─── */
+        .concept-box {
+            position: relative;
+            background: var(--bg-mid);
+            border: 1px solid var(--border);
+            border-right: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 26px 28px;
+            margin: 24px 0;
+        }
+        .concept-box-label {
+            position: absolute;
+            top: -11px;
+            right: 20px;
+            font-size: 0.65rem;
+            font-weight: 900;
+            letter-spacing: 2.5px;
+            color: var(--accent-light);
+            background: var(--bg-mid);
+            padding: 0 8px;
+            text-transform: uppercase;
+        }
+        .concept-box p {
+            color: var(--text-muted);
+            font-size: 0.96rem;
+            line-height: 1.9;
+            margin-bottom: 0;
+        }
+
+        /* ─── باکس راه‌حل (سبز) ─── */
+        .solution-box {
+            background: var(--sage-dim);
+            border: 1px solid rgba(143,174,138,0.22);
+            border-right: 4px solid var(--sage);
+            border-radius: 8px;
+            padding: 26px 28px;
+            margin: 24px 0;
+        }
+        .solution-box-label {
+            font-size: 0.65rem;
+            font-weight: 900;
+            letter-spacing: 2.5px;
+            color: var(--sage);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .solution-box p {
+            color: #c0cdbe;
+            font-size: 0.96rem;
+            line-height: 1.9;
+            margin-bottom: 0;
+        }
+
+        /* ─── مقایسه موضع/منفعت ─── */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin: 26px 0;
+        }
+        @media (min-width: 600px) {
+            .compare-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .compare-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 22px;
+        }
+        .compare-card .compare-label {
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .compare-card.position .compare-label { color: var(--text-muted); }
+        .compare-card.interest .compare-label { color: var(--sage); }
+        .compare-card.interest { border-color: rgba(143,174,138,0.25); }
+        .compare-card p {
+            color: #b9c6c5;
+            font-size: 0.94rem;
+            font-weight: 300;
+            line-height: 1.85;
+            margin-bottom: 0;
+        }
+
+        /* ─── فهرست گام‌ها (BATNA و ...) ─── */
+        .step-list {
+            margin: 26px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 18px;
+        }
+        .step-icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: var(--accent-dim);
+            color: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+        .step-text {
+            color: #c5d2d3;
+            font-size: 0.96rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* ─── جمع‌بندی نهایی ─── */
+        .final-box {
+            background: linear-gradient(135deg, var(--bg-mid), var(--bg-card));
+            border: 1px solid rgba(143,174,138,0.2);
+            border-radius: 12px;
+            padding: 36px 32px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .final-box .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--sage);
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+        .final-box p {
+            color: #d2ddd9;
+            font-size: 1.0rem;
+            font-weight: 300;
+            line-height: 2.05;
+            text-align: justify;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            text-align: center;
+            padding: 55px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.87rem;
+            margin-top: 60px;
+        }
+        footer .tagline {
+            color: var(--sage);
+            font-size: 1.0rem;
+            font-weight: 600;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    <a href="index.html" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        بازگشت به کتابخانه
+    </a>
+</div>
+
+<div class="hero">
+    <div class="hero-badge">تحلیل کامل کتاب</div>
+    <h1>هنر <em>بله گرفتن</em></h1>
+    <p class="hero-sub">اثر راجر فیشر و ویلیام یوری — راهنمای مذاکره اصولی</p>
+    <p class="hero-quote">به جای جنگیدن بر سر موضع، روی منافع واقعی تمرکز کن — تا به توافقی برسی که برای هر دو طرف خوب باشد، رابطه را خراب نکند و عادلانه باشد.</p>
+</div>
+
+<div class="container">
+
+    <!-- مقدمه -->
+    <section class="law-section" data-num="۰">
+        <div class="part-header">
+            <span class="part-tag">مقدمه</span>
+            <h2>چرا این کتاب اهمیت دارد؟</h2>
+        </div>
+        <div class="content">
+            <p>«هنر بله گرفتن» یکی از تأثیرگذارترین کتاب‌های دنیا درباره مذاکره است. این کتاب به‌جای چانه‌زدن و جنگ بر سر موضع — مثل «این قیمت را می‌خواهم و تمام» — روشی هوشمندانه و اصولی به نام مذاکره اصولی آموزش می‌دهد.</p>
+            <div class="concept-box">
+                <span class="concept-box-label">هدف کتاب</span>
+                <p>رسیدن به توافق‌هایی که برای هر دو طرف خوب باشد، رابطه را خراب نکند و عادلانه باشد. این روش در مذاکرات کاری، خانوادگی، خرید، فروش و هر موقعیت دیگری کاربرد دارد و به افراد کمک می‌کند کمتر ضرر کنند و بیشتر به توافق برسند.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۱ -->
+    <section class="law-section" data-num="۱">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۱</span>
+            <h2>بر سر موضع چانه نزن<span class="en">Don't Bargain Over Positions</span></h2>
+        </div>
+        <div class="content">
+            <p>وقتی دو طرف روی موضع ثابت خود پافشاری می‌کنند — مثل «من این قیمت را قبول نمی‌کنم» — مذاکره طولانی، خسته‌کننده و اغلب ناعادلانه می‌شود. این روش رابطه را خراب می‌کند، زمان زیادی می‌گیرد و ممکن است به توافق بد یا بدون توافق منجر شود؛ مثل یک جنگ که در آن هر دو طرف ضرر می‌کنند.</p>
+            <div class="solution-box">
+                <span class="solution-box-label">راه بهتر</span>
+                <p>مذاکره اصولی، که روی منافع واقعی تمرکز دارد، نه مواضع اعلام‌شده. این فصل پایه‌ای است برای تمام مفاهیم بعدی کتاب.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۲ -->
+    <section class="law-section" data-num="۲">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۲</span>
+            <h2>انسان‌ها را از مسئله جدا کن<span class="en">Separate the People from the Problem</span></h2>
+        </div>
+        <div class="content">
+            <p>مذاکره‌کنندگان اول انسان هستند، با احساسات، ارزش‌ها و دیدگاه‌های خودشان. اگر مسئله را با شخص قاطی کنی، مذاکره شخصی و احساسی می‌شود و سخت‌تر حل می‌شود.</p>
+            <div class="solution-box">
+                <span class="solution-box-label">راه‌حل</span>
+                <p>رابطه را جدا از مسئله نگه دار؛ با احترام با شخص رفتار کن اما روی مسئله سخت‌گیر باش. احساسات را مدیریت کن، خوب گوش بده، دیدگاه طرف مقابل را درک کن و مثل دو شریک که کنار هم مشکل را حل می‌کنند بنشین — نه رو در رو.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۳ -->
+    <section class="law-section" data-num="۳">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۳ — کلیدی‌ترین فصل</span>
+            <h2>روی منافع تمرکز کن، نه مواضع<span class="en">Focus on Interests, Not Positions</span></h2>
+        </div>
+        <div class="content">
+            <p>مواضع چیزی است که طرفین می‌گویند؛ منافع واقعی، دلیل پشت آن است. اغلب مواضع با هم تعارض دارند، اما منافع مشترک زیاد است. این فصل آموزش می‌دهد چطور منافع پنهان هر طرف را پیدا کنی — با پرسیدن «چرا این را می‌خواهی؟».</p>
+            <div class="compare-grid">
+                <div class="compare-card position">
+                    <span class="compare-label">موضع</span>
+                    <p>«خانه را به کمتر از ۵۰۰ میلیون نمی‌فروشم.»</p>
+                </div>
+                <div class="compare-card interest">
+                    <span class="compare-label">منفعت واقعی</span>
+                    <p>«من به این پول نیاز دارم تا بتوانم خانه جدیدی بخرم.»</p>
+                </div>
+            </div>
+            <p>وقتی روی منافع کار کنی، راه‌حل‌های خلاقانه بیشتری پیدا می‌شود و توافق عادلانه‌تر خواهد بود.</p>
+        </div>
+    </section>
+
+    <!-- فصل ۴ -->
+    <section class="law-section" data-num="۴">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۴</span>
+            <h2>گزینه‌های سود متقابل بساز<span class="en">Invent Options for Mutual Gain</span></h2>
+        </div>
+        <div class="content">
+            <p>قبل از تصمیم‌گیری، گزینه‌های زیادی بساز. خیلی‌ها زود گزینه اول را قبول یا رد می‌کنند، اما با بارش فکری (فکر کردن بدون قضاوت) می‌توان راه‌حل‌هایی پیدا کرد که هر دو طرف سود ببرند — یعنی اول کیک را بزرگ‌تر کنیم، بعد تقسیمش کنیم.</p>
+            <div class="concept-box">
+                <span class="concept-box-label">موانع رایج</span>
+                <p>فکر کردن محدود، فقط یک جواب درست را در نظر گرفتن، و ترس از به‌خطر انداختن موضع — سه مانع اصلی‌ای هستند که از پیدا کردن گزینه‌های خلاقانه جلوگیری می‌کنند.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل ۵ -->
+    <section class="law-section" data-num="۵">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۵</span>
+            <h2>روی معیارهای عینی پافشاری کن<span class="en">Insist on Using Objective Criteria</span></h2>
+        </div>
+        <div class="content">
+            <p>وقتی منافع تعارض دارند، به‌جای فشار و زور، از معیارهای منصفانه و مستقل استفاده کن — مثل ارزش بازار، قانون، عرف یا نظر کارشناسی. این کار مذاکره را از یک جنگ قدرت به یک بحث منطقی تبدیل می‌کند و هر دو طرف احساس می‌کنند توافق عادلانه است.</p>
+        </div>
+    </section>
+
+    <!-- فصل ۶ -->
+    <section class="law-section" data-num="۶">
+        <div class="part-header">
+            <span class="part-tag">فصل ۰۶</span>
+            <h2>اگر طرف مقابل قدرتمندتر بود چی؟<span class="en">Develop Your BATNA</span></h2>
+        </div>
+        <div class="content">
+            <p>BATNA یعنی بهترین جایگزین برای توافق مذاکره‌شده — یعنی بهترین گزینه‌ای که اگر مذاکره به نتیجه نرسد، در اختیار داری. اگر BATNA قوی داشته باشی، قدرتت در مذاکره بیشتر می‌شود و کمتر مجبور می‌شوی شرایط بد را قبول کنی.</p>
+            <div class="step-list">
+                <div class="step-item">
+                    <span class="step-icon">۱</span>
+                    <span class="step-text">پیش از مذاکره، بهترین جایگزین ممکن خارج از میز مذاکره را شناسایی و تقویت کن.</span>
+                </div>
+                <div class="step-item">
+                    <span class="step-icon">۲</span>
+                    <span class="step-text">حتی اگر طرف مقابل قوی‌تر باشد، با آمادگی و داشتن جایگزین، می‌توانی نتیجه بهتری بگیری و در برابر فشار مقاومت کنی.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فصل پایانی -->
+    <section class="law-section" data-num="۷">
+        <div class="part-header">
+            <span class="part-tag">فصل‌های پایانی</span>
+            <h2>سوالات رایج و موقعیت‌های دشوار</h2>
+        </div>
+        <div class="content">
+            <p>کتاب به سوالات عملی‌ای مثل «اگر طرف مقابل دروغ بگوید یا از ترفندهای کثیف استفاده کند؟» یا «چطور در مذاکرات سخت پاسخ بدهیم؟» می‌پردازد و راهکارهای عملی برای این موقعیت‌ها ارائه می‌دهد.</p>
+        </div>
+    </section>
+
+    <!-- جمع‌بندی -->
+    <div class="final-box">
+        <div class="label">تأکید نهایی</div>
+        <p>مذاکره اصولی برای همه موقعیت‌ها کار می‌کند — از معامله‌های ساده روزمره تا مذاکرات پیچیده کاری و بین‌المللی. این روش به تو کمک می‌کند بدون تسلیم شدن و بدون خراب کردن رابطه، به توافقی برسی که واقعاً خوب است؛ توافقی که از تقابل موضع‌ها عبور می‌کند و به اشتراک منافع می‌رسد.</p>
+    </div>
+
+</div>
+
+<footer>
+    این خلاصه با هدف ارتقای آگاهی و درک عمیق‌تر مفاهیم کتاب تهیه شده است.
+    <div class="tagline">«بهترین توافق، آن است که هیچ‌کس مجبور به تسلیم نشود.»</div>
+</footer>
+
+</body>
+</html>
