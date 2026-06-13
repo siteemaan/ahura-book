@@ -13,16 +13,16 @@
 
         @import url('https://fonts.googleapis.com/css2?family=IranNastaliq&display=swap');
 
-        /* استایل‌های پایه تم سلطنتی و مینیمال */
+        /* استایل‌های پایه تم تاریک، مقتدر و لوکس */
         body {
             font-family: 'Casablanca', 'Tahoma', sans-serif;
-            background-color: #f7f5f0; /* سفید استخوانی/مرمری ملایم */
-            color: #1a1a1a;
+            background-color: #0d0d0d; /* مشکی عمیق استودیویی */
+            color: #e0e0e0;
             line-height: 1.8;
             margin: 0;
             padding: 40px 20px;
             overflow-x: hidden;
-            transition: background-color 0.4s ease;
+            background-image: radial-gradient(circle at 50% 20%, #1a1a1a 0%, #0d0d0d 80%);
         }
 
         #main-wrapper {
@@ -31,16 +31,16 @@
             transition: filter 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* بخش سربرگ و تیترها */
+        /* سربرگ و عناوین */
         h1 {
             font-family: 'IranNastaliq', serif !important;
-            color: #111111;
-            font-size: 4.5rem;
+            color: #d4af37; /* طلایی لوکس */
+            font-size: 4.8rem;
             text-align: center;
             margin-top: 0;
             margin-bottom: 10px;
             font-weight: normal;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            text-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
         }
 
         p.intro {
@@ -48,28 +48,28 @@
             text-align: center;
             max-width: 750px;
             margin: 0 auto 60px;
-            color: #555555;
+            color: #aaaaaa;
             font-size: 1.2rem;
-            border-bottom: 1px dashed #d1c7bd;
+            border-bottom: 1px dashed #333333;
             padding-bottom: 30px;
         }
 
-        /* بخش‌بندی کتابخانه */
+        /* بخش‌بندی اصلی */
         .section {
             margin-bottom: 60px;
         }
 
         .section h2 {
             font-family: 'IranNastaliq', serif !important;
-            color: #1a1a1a;
+            color: #e0e0e0;
             font-size: 3rem;
-            border-right: 4px solid #c5a880; /* خط طلایی مات ارستوکراتیک */
+            border-right: 4px solid #d4af37; /* خط امضای طلایی */
             padding-right: 20px;
             margin-bottom: 40px;
             font-weight: normal;
         }
 
-        /* چیدمان کتاب‌ها */
+        /* شبکه چیدمان کتاب‌ها */
         .books {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -84,64 +84,68 @@
             display: block;
         }
 
-        /* کارت کتاب سه‌بعدی و لوکس */
+        /* کارت کتاب با افکت هاله نور طلایی */
         .book-card {
-            background: #ffffff;
-            border: 1px solid #e9e6df;
-            border-radius: 4px; /* لبه‌های تیزتر و هندسی کلاسیک */
+            background: #141414;
+            border: 1px solid #222222;
+            border-radius: 6px;
             padding: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             text-align: center;
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             cursor: pointer;
             position: relative;
-            background-image: linear-gradient(180deg, #ffffff 0%, #fdfcfb 100%);
         }
 
         .book-card:hover {
-            transform: translateY(-12px);
-            border-color: #c5a880; /* فوکوس طلایی */
-            box-shadow: 0 20px 35px rgba(197, 168, 128, 0.15), 0 15px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            /* هاله درخشش طلایی ملایم دور کتاب */
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25), 0 5px 15px rgba(0, 0, 0, 0.6);
             z-index: 10;
         }
 
-        /* تصویر جلد کتاب */
+        /* جلد کتاب */
         .book-card img {
             width: 100%;
             height: 270px;
             object-fit: cover;
-            border-radius: 2px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-radius: 4px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
             transition: transform 0.4s ease;
         }
 
         .book-card:hover img {
-            transform: scale(1.02);
+            transform: scale(1.03);
         }
 
-        /* عنوان و نویسنده */
+        /* عنوان و نام نویسنده */
         .book-title {
             font-family: 'Casablanca', sans-serif;
             margin-top: 15px;
             font-weight: bold;
             font-size: 15px;
-            color: #111111;
+            color: #ffffff;
             height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
             line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .book-card:hover .book-title {
+            color: #d4af37;
         }
 
         .book-author {
             font-family: 'Casablanca', sans-serif;
             font-size: 13px;
-            color: #777777;
+            color: #888888;
             margin-top: 5px;
-            letter-spacing: 0.3px;
         }
 
-        /* کتیبه خلاصه کتاب (لوح اطلاعات متحرک) */
+        /* لوح خلاصه متحرک - شیشه‌ای دودی و طلایی */
         #summary-box {
             position: fixed;
             bottom: 30px;
@@ -149,14 +153,14 @@
             transform: translateX(-50%) translateY(40px);
             width: 85%;
             max-width: 650px;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(197, 168, 128, 0.3);
-            border-top: 4px solid #c5a880;
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-top: 4px solid #d4af37;
             padding: 25px 35px;
-            border-radius: 4px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+            border-radius: 6px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
             z-index: 1000;
             opacity: 0;
             pointer-events: none;
@@ -164,7 +168,7 @@
             text-align: justify;
             font-family: 'Casablanca', sans-serif;
             font-size: 1.15rem;
-            color: #222222;
+            color: #e5e5e5;
             line-height: 1.9;
         }
 
@@ -173,10 +177,9 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* افکت محوشدگی اشرافی پس‌زمینه */
+        /* افکت محوشدگی سینمایی پس‌زمینه هنگام هاور */
         .blur-effect {
-            filter: blur(4px) grayscale(15%);
-            opacity: 0.6;
+            filter: blur(5px) brightness(60%);
         }
     </style>
 </head>
